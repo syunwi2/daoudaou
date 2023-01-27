@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask import request
 import pymysql
-from pkg.mkscd import *
 
 app = Flask(__name__)
 
@@ -15,12 +14,30 @@ def view_template(): # 여기에 파라미터로 전달해서 뷰함수실행 �
 # 백엔드 서버
 @app.route("/dept-search")
 def search_dept():
-    get_info_reg()
-    
-    return render_template("db.html",result = print(get_info_reg()))
+    dept_no = request.args.get('deptno') # 화면에서 정보 받는 방식은 get, post// 따로 설정 안한 이상 기본은 get방식이라 get으로 받게 하면 된다.    
+    print(dept_no)
+    print('---')
+# 1. mysql - python 연결
+    conn = pymysql.connect(host = 'localhost',
+                       user = 'root',
+                       password = 'root1234',
+                       db = 'scott',
+                       charset = 'utf8')
+# 2. 커서 
+    cur = conn.cursor()
+    sql = f'select * from emp where deptno = {dept_no}'
+    cur.execute(sql)
+# result에 요청된 값을 담아줌
+    result =[]
+    for record in cur:
+        result.append([record[0], record[1]])
+    print('--------------------------------------------')
+# return을 통해 화면을 출력(응답에 대한 결과로 브라우저에서 결과값 확인 가능)
+    return render_template("result.html", result = result)
+# 결과를 보여줄 때는 반드시 그에 해당하는 html이 존재해야한다.
 
 if __name__ == "__main__":
-	app.run(host = "0.0.0.0", port = 5002, debug = True)
+		app.run(host = "0.0.0.0", port = 5002, debug = True)
   
   
   
