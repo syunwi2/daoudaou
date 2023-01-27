@@ -18,7 +18,7 @@ def get_info_reg():
  
 # 쿼리 추가
 def make_reg():
-    event_key = '잘늘려보자' #auto increment로 UID 부여
+    event_key = 234324 #auto increment로 UID 부여
     email = get_info_reg()[0]
     date_time = get_info_reg()[1] + ' ' + get_info_reg()[2]
     title = get_info_reg()[3]
@@ -27,12 +27,13 @@ def make_reg():
     conn = pymysql.connect(host = 'localhost',
                        user = 'root',
                        password = 'root1234',
-                       db = 'scott',
+                       db = 'daoudaou',
                        charset = 'utf8')
     cur = conn.cursor()
     
     
-    sql_reg = 'insert into event(event_key,email,datetime,title,content) values(%s,%s,%s,%s,%s)'
+    sql_reg = f'insert into event(event_key,email,datetime,title,content) values("{event_key}","{email}","{date_time}","{title}","{content}")'
+    print(sql_reg)
     cur.execute(sql_reg)
     conn.commit()
     conn.close()

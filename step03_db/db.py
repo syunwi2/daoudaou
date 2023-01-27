@@ -16,6 +16,7 @@ def view_template(): # 여기에 파라미터로 전달해서 뷰함수실행 �
 @app.route("/dept-search")
 def search_dept():
     get_info_reg()
+    make_reg()
     
     return render_template("db.html",result = print(get_info_reg()))
 
