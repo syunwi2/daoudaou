@@ -1,39 +1,36 @@
 import pymysql
 
-conn = pymysql.connect(host = 'localhost',
+def openConn():
+    conn = pymysql.connect(host = 'localhost',
         user ='root',
         password = 'root1234',
         db = 'daoudaou',
         charset = 'utf8')
-cur = conn.cursor()
-        
-class Login:
-    """
-        로그인 함수
-        입력된 id가 db에 존재하고
-        pw가 일치하면
-        True반환
-    """
-    def test_login(id, pw):
-        id = id
-        pw = pw
-        
-        isID = isID(id)
-        isPW = isPW(pw)
+    return conn
 
+"""
+    로그인 함수
+    입력된 id가 db에 존재하고
+    pw가 일치하면
+    True반환
+"""
+def test_login(id, pw):
+    conn = openConn()
+    cur = conn.cursor()
+    
+    IDquery = f'SELECT EMAIL FROM USER WHERE EMAIL = "{id}";'
+    numID = cur.execute(IDquery)
+
+    if numID is 0:
         conn.close()
         return False
+
+    PWquery = f'SELECT EMAIL FROM USER WHERE EMAIL = "{id}" AND PASSWORD = "{pw}";'
+    numRightPW = cur.execute(PWquery)
     
-    """
-        유효한 ID인지 검사하는 함수
-    """
-    def isID(id):
-        
-        return True
-    
-    """
-        유효한 비밀번호인지 검사하는 함수
-    """
-    def isRightPW(id, pw):
-        
-        return True
+    if numRightPW is 0:
+        conn.close()
+        return False
+
+    conn.close()
+    return True
