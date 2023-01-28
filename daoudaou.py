@@ -9,9 +9,11 @@ app = Flask(__name__)
 """
     로그인 페이지
 """
+
+
 @app.route("/")
 def login():
-    isLoginned=None
+    isLoginned = None
     return render_template("login.html", isLoginned=isLoginned)
 
 
@@ -19,6 +21,8 @@ def login():
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
+
+
 @app.route("/login", methods=["POST", "GET"])
 def result():
     if request.method == "POST":
@@ -38,6 +42,8 @@ def result():
 """
     일회성 일정 페이지
 """
+
+
 @app.route("/event")
 def event():
     page = True
@@ -57,6 +63,8 @@ def event():
 """
     반복성 일정 페이지
 """
+
+
 @app.route("/routine")
 def routine():
     page = True
@@ -68,6 +76,11 @@ def routine():
         },
     ]
     return render_template("routine.html", events=my_list)
+
+
+@app.route("/send_event", methods=["POST"])
+def send_event():
+    return "response"
 
 
 if __name__ == "__main__":

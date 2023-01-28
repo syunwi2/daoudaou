@@ -51,8 +51,16 @@
                   <input class="w3-input" type="text">
                 </div>
                 <div class="form_inputs">
-                  <label class="w3-text-blue form_labels"><b>날짜</b></label>
-                  <input id="event_date" style="" class="w3-input" type="date">
+                    <label class="w3-text-blue form_labels"><b>요일</b></label>
+                    <div style="display:flex; justify-content: space-around;" >
+                      <div style="display:flex; justify-content: space-around;">
+                        <input id="event_date" style="" class="w3-input" type="checkbox">
+                      </div>
+                    </div>
+                    {% if {{}} %}
+                    
+                    {% else %}
+                    {% endif %}
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>시간</b></label>
@@ -102,16 +110,16 @@
                 class="w3-text-grey w3-margin-left w3-padding-16"
               >
                 <i
-                  style="margin-right: 0.5rem"
+                  style="margin-right: 1rem"
                   class="material-icons w3-xxlarge font_color"
-                  >looks_one</i
+                  >all_inclusive</i
                 >
-                <span class="font_color"> <b> 일회성 일정</b> </span>
+                <span class="font_color"> <b> 반복 일정</b> </span>
               </h2>
               {# 리스트 바꾸는 버튼 #}
               <h5 class="w3-text-grey w3-margin-right w3-padding-16">
-                <a class="go_other_list" href="/routine">
-                  반복 일정
+                <a class="go_other_list" href="/event">
+                  일회성 일정
                   <i class="fa fa-arrow-right"></i>
                 </a>
               </h5>
@@ -145,9 +153,9 @@
                     style="position: relative; top: 1px"
                     class="fa fa-calendar fa-fw"
                   ></i>
-                  2022년 10월 11일
+                  월, 수, 금
                 </div>
-                <div><i class="fa fa-clock-o fa-fw"></i> 10시 30분</div>
+                <div><i class="fa fa-clock-o fa-fw"></i>오전 10시 30분</div>
               </div>
               <p style="padding-left: 2px" class="w3-opacity">
                 혹한기 대비 아침 제설 회의를 하기로 했다.
