@@ -45,7 +45,8 @@ def join():
         id = request.form["id"]
         name = request.form["name"]
         pw = request.form["pw"]
-        return User.join(id, name, pw)
+        pw2 = request.form["pw2"]
+        return User.join(id, name, pw, pw2)
 
 
 """
