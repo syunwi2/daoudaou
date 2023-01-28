@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import User
+import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
 
