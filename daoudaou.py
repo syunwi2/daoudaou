@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
 import User
+from pkg import make_irreg
+from pkg import make_reg
+
 
 app = Flask(__name__)
 
@@ -38,6 +41,9 @@ def result():
 @app.route("/event")
 def event():
     page = True
+    make_irreg.get_info_irreg()
+    make_irreg.make_irreg()
+
     my_list = [
         {
             "datetime": "10월 7일 10시 30분",
