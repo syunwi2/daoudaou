@@ -74,7 +74,7 @@
                   ></textarea>
                 </div>
                 <div style="display:flex; justify-content:center; margin-bottom:1rem;" class="form_inputs">
-                  <button style="background-color:#2284c3; color:white" class="w3-button w3-round w3-hover-blue">등록</button> 
+                  <button id="upload_button" style="background-color:#2284c3; color:white" class="w3-button w3-round w3-hover-blue">등록</button> 
                 </div>             
               </form>        
             </div>
@@ -147,7 +147,7 @@
                   ></i>
                   2022년 10월 11일
                 </div>
-                <div><i class="fa fa-clock-o fa-fw"></i> 10시 30분</div>
+                <div><i class="fa fa-clock-o fa-fw"></i>오전 10시 30분</div>
               </div>
               <p style="padding-left: 2px" class="w3-opacity">
                 혹한기 대비 아침 제설 회의를 하기로 했다.
@@ -216,6 +216,15 @@
         const eventList = document.querySelector('#event_list')
         eventList.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       }
+
+      // 보내는 버튼 로직
+      const uploadButton = document.querySelector('#upload_button')
+
+      const sendFunc = () => {
+        const uploadButton = document.querySelector('#upload_button')
+      }
+
+      uploadButton.addEventListener('click',)
     </script>
   </body>
 </html>
