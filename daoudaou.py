@@ -29,6 +29,24 @@ def result():
         pw = request.form["pw"]
         return User.login(id, pw)
 
+"""
+    회원 가입 페이지
+"""
+@app.route("/joinpage")
+def joinPage():
+    return User.joinPage()
+
+"""
+    회원 가입 
+"""
+@app.route("/join", methods=["POST", "GET"])
+def join():
+    if request.method == "POST":
+        id = request.form["id"]
+        name = request.form["name"]
+        pw = request.form["pw"]
+        return User.join(id, name, pw)
+
 
 """
     일회성 일정 페이지
