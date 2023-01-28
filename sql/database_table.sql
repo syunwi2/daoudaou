@@ -30,5 +30,5 @@ alter table routine modify ROUTINE_KEY INT FIRST;
 alter table routine modify ROUTINE_KEY int not null auto_increment;
 
 INSERT INTO USER VALUES("syunwi2@gmail.com", "root", "root");
-INSERT INTO EVENT VALUES("syunwi2@gmail.com", "2023-01-28 21:00:00", "TEST", "TEST EVENT CONTENT");
-INSERT INTO USER VALUES("syunwi2@gmail.com", "1", "TEST", "TEST ROUTINE CONTENT", "21:00:00");
+INSERT INTO EVENT VALUES(1, "syunwi2@gmail.com", '2023-01-28 21:00:00', "TEST", "TEST EVENT CONTENT");
+INSERT INTO ROUTINE VALUES(1, "syunwi2@gmail.com", 1, "TEST", "TEST ROUTINE CONTENT", "21:00:00");
