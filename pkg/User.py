@@ -1,5 +1,12 @@
 import pymysql
+from flask import render_template
 
+"""
+    openConn
+    open Connection to DB Server
+    parameter : None
+    return : connection object
+"""
 def openConn():
     conn = pymysql.connect(host = 'localhost',
         user ='root',
@@ -9,10 +16,42 @@ def openConn():
     return conn
 
 """
-    로그인 함수
-    입력된 id가 db에 존재하고
-    pw가 일치하면
-    True반환
+    firstpage
+    show first login page
+    parameter : None
+    return : (html template)
+"""
+def firstpage():
+    return render_template("login.html", isLoginned=None)
+  
+"""
+    login
+    show login page or event page, depending on the result of login
+    parameter : id, pw
+    return : (html template)
+"""
+def login(id, pw):
+    isLoginned = test_login(id, pw)
+
+    # 수정 필요
+    if isLoginned:
+        my_list = [
+            {
+            "datetime": "10월 7일 10시 30분",
+            "title": "뭐 할까요?",
+            "content": "야호",
+            },
+        ]
+        return render_template("event.html", events=my_list)
+
+    else:
+        return render_template("login.html", isLoginned=isLoginned)
+
+"""
+    test_login
+    check the input ID and PASSWORD is in the DB and right pair.
+    parameter : id, pw
+    return : True/False
 """
 def test_login(id, pw):
     conn = openConn()
