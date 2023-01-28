@@ -25,6 +25,13 @@ def result():
         pw = request.form["pw"]
         return User.login(id, pw)
 
+"""
+    회원 가입 : 서버에 데이터 전송 후 로그인 페이지로 이동
+"""
+@app.route("/join")
+def join():
+    return User.joinPage()
+
 
 """
     일회성 일정 페이지

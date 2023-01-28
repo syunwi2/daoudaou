@@ -73,3 +73,20 @@ def test_login(id, pw):
 
     conn.close()
     return True
+
+"""
+    joinPage
+    show join page
+    return : (html template)
+"""
+def joinPage():
+    return render_template("join.html")
+
+"""
+    join
+    get data from user and send it to DB 
+    parameter : id, name, pw
+    return : (html template)
+"""
+def join():
+    return render_template("login.html", isLoginned=None)
