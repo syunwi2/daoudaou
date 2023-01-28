@@ -9,34 +9,21 @@ app = Flask(__name__)
 """
     로그인 페이지
 """
-
-
 @app.route("/")
-def login():
-    isLoginned = None
-    return render_template("login.html", isLoginned=isLoginned)
+def firstpage():
+    return User.firstpage()
 
 
 """
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
-
-
 @app.route("/login", methods=["POST", "GET"])
 def result():
     if request.method == "POST":
         id = request.form["id"]
         pw = request.form["pw"]
-
-        isLoginned = User.test_login(id, pw)
-        print(isLoginned)
-
-        if isLoginned:
-            return render_template("user.html", isLoginned=isLoginned)
-
-        else:
-            return render_template("login.html", isLoginned=isLoginned)
+        return User.login(id, pw)
 
 
 """

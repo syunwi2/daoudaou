@@ -2,5 +2,4 @@
 __pycache__/User.cpython-310.pyc
 __pycache__/User.cpython-38.pyc
 __pycache__/User.cpython-310.pyc
-pkg/__pycache__/User.cpython-310.pyc
-pkg/mkscd.py
+*.pyc
