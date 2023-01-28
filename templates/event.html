@@ -48,7 +48,7 @@
               <form class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>제목</b></label>
-                  <input class="w3-input" type="text">
+                  <input id="event_title" class="w3-input" type="text">
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>날짜</b></label>
@@ -56,10 +56,10 @@
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>시간</b></label>
-                  <input id="event_date" style="" class="w3-input" type="time">
+                  <input id="event_time" style="" class="w3-input" type="time">
                 </div>
                 <div class="form_inputs">
-                  <label style="" class="w3-text-blue form_labels"><b>내용</b></label>
+                  <label class="w3-text-blue form_labels"><b>내용</b></label>
                   <textarea id="event_content" style="
                     margin-top: 0.5rem;
                     width: 100%;
@@ -176,6 +176,7 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const cancelConfirm = (event)=>{
           console.log(event.target)
@@ -220,11 +221,31 @@
       // 보내는 버튼 로직
       const uploadButton = document.querySelector('#upload_button')
 
-      const sendFunc = () => {
-        const uploadButton = document.querySelector('#upload_button')
+      const sendFunc = async () => {
+        event.preventDefault();
+        const eventTitle = document.querySelector('#event_title')
+        const eventTime = document.querySelector('#event_time')
+        const eventDate = document.querySelector('#event_date')
+        const eventContent = document.querySelector('#event_content')
+        console.log(eventTitle.value)
+        console.log(eventTime.value)
+        console.log(eventDate.value)
+        console.log(eventContent.value)
+
+        const response = await axios({
+          method:'POST',
+          url: '/send_event',
+          data: {
+            title: eventTitle.value,
+            time: eventTime.value,
+            date: eventDate.value,
+            content: eventContent.value
+          },
+        })
+        location.reload()
       }
 
-      uploadButton.addEventListener('click',)
+      uploadButton.addEventListener('click', sendFunc)
     </script>
   </body>
 </html>
