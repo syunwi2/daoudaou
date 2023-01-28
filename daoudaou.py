@@ -26,11 +26,22 @@ def result():
         return User.login(id, pw)
 
 """
-    회원 가입 : 서버에 데이터 전송 후 로그인 페이지로 이동
+    회원 가입 페이지
 """
-@app.route("/join")
-def join():
+@app.route("/joinpage")
+def joinPage():
     return User.joinPage()
+
+"""
+    회원 가입 
+"""
+@app.route("/join", methods=["POST", "GET"])
+def join():
+    if request.method == "POST":
+        id = request.form["id"]
+        name = request.form["name"]
+        pw = request.form["pw"]
+        return User.join(id, name, pw)
 
 
 """
