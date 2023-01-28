@@ -77,14 +77,9 @@ def routine():
 # @app.route("/send_event")
 @app.route("/send_event", methods=["POST"])
 def send_event():
-    print(request.form)
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "워 할까요?",
-            "content": "이야호",
-        },
-    ]
+    make_irreg.get_info_irreg()
+    make_irreg.make_irreg()
+    my_list=[]
     return render_template("event.html", events=my_list)
 
 
