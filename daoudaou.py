@@ -38,7 +38,6 @@ def result():
 @app.route("/event")
 def event():
     my_list = make_irreg.irreg_view()
-    print(my_list)
     return render_template("event.html", events=my_list)
 
 
