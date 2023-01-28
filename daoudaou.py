@@ -46,10 +46,6 @@ def result():
 
 @app.route("/event")
 def event():
-    page = True
-    make_irreg.get_info_irreg()
-    make_irreg.make_irreg()
-
     my_list = [
         {
             "datetime": "10월 7일 10시 30분",
@@ -78,9 +74,18 @@ def routine():
     return render_template("routine.html", events=my_list)
 
 
+# @app.route("/send_event")
 @app.route("/send_event", methods=["POST"])
 def send_event():
-    return "response"
+    print(request.form)
+    my_list = [
+        {
+            "datetime": "10월 7일 10시 30분",
+            "title": "워 할까요?",
+            "content": "이야호",
+        },
+    ]
+    return render_template("event.html", events=my_list)
 
 
 if __name__ == "__main__":
