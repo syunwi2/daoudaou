@@ -1,11 +1,5 @@
 import pymysql
 
-conn = pymysql.connect(host = 'localhost',
-                       user = 'root',
-                       password = 'root1234',
-                       db = 'daoudaou',
-                       charset = 'utf8')
-cur = conn.cursor()
 
 
 
@@ -18,34 +12,50 @@ my_list = [
     ]
 
 # 비정기 일정 조회    
-dict = {}
+def irreg_view():
+    conn = pymysql.connect(host = 'localhost',
+                       user = 'root',
+                       password = 'root1234',
+                       db = 'daoudaou',
+                       charset = 'utf8')
+    cur = conn.cursor()
 
-sql_view1 = 'select * from event order by datetime'
-cur.execute(sql_view1)
+    
+    sql_view1 = 'select * from event order by datetime'
+    cur.execute(sql_view1)
 
-schedule_list_irreg = []
+    schedule_list_irreg = []
+    irreg_dict_list = []
 
-for record in cur:
-    schedule_list_irreg.append(list(record[2:]))
+    for record in cur:
+        schedule_list_irreg.append(list(record))
 
-for scd in schedule_list_irreg:
-    scd[0] = str(scd[0])
+    for scd in schedule_list_irreg:
+        scd[2] = str(scd[2])
 
-print(schedule_list_irreg)
-conn.close()
+    for scd in schedule_list_irreg:
+        dict = {}
+        dict['event_key'] = scd[0]
+        dict['event_title'] = scd[3]
+        dict['event_date'] = scd[2][:11]
+        dict['event_time'] = scd[2][11:]
+        dict['event_content'] = scd[4]
+        irreg_dict_list.append(dict)
+
+    return irreg_dict_list
 
 
 # 정기 일정 조회    
-sql_view2 = 'select * from routine order by day'
-cur.execute(sql_view2)
+# sql_view2 = 'select * from routine order by day'
+# cur.execute(sql_view2)
 
-schedule_list_reg = []
+# schedule_list_reg = []
 
-for record in cur:
-    schedule_list_reg.append(list(record[2:]))
+# for record in cur:
+#     schedule_list_reg.append(list(record[2:]))
 
-for scd in schedule_list_reg:
-    scd[0] = str(scd[0])
+# for scd in schedule_list_reg:
+#     scd[0] = str(scd[0])
 
-print(schedule_list_reg)
-conn.close()
+# print(schedule_list_reg)
+# conn.close()

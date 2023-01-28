@@ -33,13 +33,8 @@ def result():
 
 @app.route("/event")
 def event():
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "뭐 할까요?",
-            "content": "야호",
-        },
-    ]
+    my_list = make_irreg.irreg_view()
+    print(my_list)
     return render_template("event.html", events=my_list)
 
 

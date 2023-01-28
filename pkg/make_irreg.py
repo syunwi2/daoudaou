@@ -37,3 +37,35 @@ def make_irreg():
     conn.commit()
     conn.close()
     
+    
+def irreg_view():
+    conn = pymysql.connect(host = 'localhost',
+                       user = 'root',
+                       password = 'root1234',
+                       db = 'daoudaou',
+                       charset = 'utf8')
+    cur = conn.cursor()
+
+    
+    sql_view1 = 'select * from event order by datetime'
+    cur.execute(sql_view1)
+
+    schedule_list_irreg = []
+    irreg_dict_list = []
+
+    for record in cur:
+        schedule_list_irreg.append(list(record))
+
+    for scd in schedule_list_irreg:
+        scd[2] = str(scd[2])
+
+    for scd in schedule_list_irreg:
+        dict = {}
+        dict['event_key'] = scd[0]
+        dict['event_title'] = scd[3]
+        dict['event_date'] = scd[2][:11]
+        dict['event_time'] = scd[2][11:]
+        dict['event_content'] = scd[4]
+        irreg_dict_list.append(dict)
+
+    return irreg_dict_list
