@@ -67,13 +67,7 @@ def event():
 @app.route("/routine")
 def routine():
     page = True
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "워 할까요?",
-            "content": "이야호",
-        },
-    ]
+    my_list = make_reg.reg_view()
     return render_template("routine.html", events=my_list)
 
 
@@ -87,7 +81,6 @@ def send_event():
 
 @app.route("/send_routine", methods=["POST"])
 def send_routine():
-    print(request.form)
     make_reg.get_info_reg()
     make_reg.make_reg()
     my_list =[]

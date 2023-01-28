@@ -17,7 +17,7 @@ def get_info_irreg():
     
     return (sc_email, sc_date, sc_time, sc_title, sc_content)
  
-# 쿼리 추가
+# DB 추가
 def make_irreg():
     email = get_info_irreg()[0]
     date_time = str(get_info_irreg()[1]) + ' ' + str(get_info_irreg()[2])
