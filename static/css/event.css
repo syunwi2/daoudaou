@@ -1,0 +1,144 @@
+@font-face {
+  font-family: "Happiness-Sans-Title";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Title.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Happiness-Sans-Title";
+}
+* {
+  font-family: "Happiness-Sans-Title";
+}
+
+hr {
+  border-color: rgba(91, 91, 91, 0.215);
+}
+
+.col_min_height {
+  height: 95vh;
+  overflow: auto;
+}
+
+.col_min_height::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px;
+}
+
+.col_min_height::-webkit-scrollbar-thumb {
+  background-color: #bababa;
+  border-radius: 20px;
+  border: 2px white solid;
+  height: 10%;
+}
+.font_color {
+  color: #2284c3;
+}
+
+.right_col_title {
+  display: flex;
+  height: 5rem;
+  width: 100%;
+}
+
+.title_button {
+  background-color: transparent;
+  border: none;
+}
+
+.front_icon {
+  color: #2284c3;
+}
+
+.go_other_list {
+  text-decoration: none;
+  opacity: 50%;
+}
+
+.go_other_list:hover {
+  color: #2284c3;
+  opacity: 100%;
+}
+
+.swal2-shown {
+  padding-right: 0px !important;
+}
+
+.cancle_button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  margin-right: 1rem;
+  height: fit-content;
+  width: fit-content;
+}
+
+.cancle_button i {
+  opacity: 30%;
+  color: red;
+}
+
+.cancle_button i:hover {
+  color: red;
+  opacity: 70%;
+}
+
+#top_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 2rem;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  background-color: #25cad3;
+  opacity: 0.5;
+  bottom: 1.5rem;
+  right: 2rem;
+}
+
+#top_button:hover {
+  opacity: 0.7;
+}
+
+#logout_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  opacity: 0.5;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+#logout_button:hover {
+  opacity: 0.7;
+}
+
+footer {
+  background-color: #2284c3;
+}
+
+.form_inputs {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1rem;
+}
+
+.form_labels {
+  font-size: medium;
+}

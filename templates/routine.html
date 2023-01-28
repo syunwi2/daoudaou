@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/event.css') }}"
+    />
+    
+  </head>
+  <body style="font-family: Happiness-Sans-Title" class="w3-light-grey">
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width: 1400px">
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+        <!-- Left Column -->
+        <div class="w3-third">
+          <div class="w3-white w3-text-grey w3-card-4 col_min_height">
+            <div style="height:100%; display:flex; flex-direction:column; justify-content:space-around;" class="w3-container">
+              <div style="padding-top:0.5rem;" class="greeting">
+                <div style="position:relative; padding:1.15rem; text-align:center; padding">
+                  <button id="logout_button">
+                    <i style="color:crimson ; transform: scaleX(-1);" class="material-icons">exit_to_app</i>
+                  </button>                
+                  <h3 class="w3-text-blue">
+                    안녕하세요! 김현영님!
+                  </h3>
+                </div>
+              </div>
+            <div style="padding-top:0.2rem;" class="form_area">
+              <form class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
+                <div class="form_inputs">
+                  <label class="w3-text-blue form_labels"><b>제목</b></label>
+                  <input class="w3-input" type="text">
+                </div>
+                <div class="form_inputs">
+                  <label class="w3-text-blue form_labels"><b>날짜</b></label>
+                  <input id="event_date" style="" class="w3-input" type="date">
+                </div>
+                <div class="form_inputs">
+                  <label class="w3-text-blue form_labels"><b>시간</b></label>
+                  <input id="event_date" style="" class="w3-input" type="time">
+                </div>
+                <div class="form_inputs">
+                  <label style="" class="w3-text-blue form_labels"><b>내용</b></label>
+                  <textarea id="event_content" style="
+                    margin-top: 0.5rem;
+                    width: 100%;
+                    height: 100px;
+                    padding: 12px 20px;
+                    box-sizing: border-box;
+                    border: 2px solid #ccc;
+                    border-radius: 4px;
+                    background-color: #f8f8f8;
+                    font-size: 16px;
+                    resize: none;" 
+                  ></textarea>
+                </div>
+                <div style="display:flex; justify-content:center; margin-bottom:1rem;" class="form_inputs">
+                  <button style="background-color:#2284c3; color:white" class="w3-button w3-round w3-hover-blue">등록</button> 
+                </div>             
+              </form>        
+            </div>
+          </div>
+        </div>
+        <!-- End Left Column -->
+      </div>
+
+      <!-- Right Column -->
+      <div class="w3-twothird">
+        <div style="width: 100%; height: 100%; position: relative">
+          <div
+            id="event_list"
+            class="w3-container w3-card w3-white w3-margin-bottom col_min_height"
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <h2
+                style="display: flex; align-items: center"
+                class="w3-text-grey w3-margin-left w3-padding-16"
+              >
+                <i
+                  style="margin-right: 0.5rem"
+                  class="material-icons w3-xxlarge font_color"
+                  >looks_one</i
+                >
+                <span class="font_color"> <b> 일회성 일정</b> </span>
+              </h2>
+              {# 리스트 바꾸는 버튼 #}
+              <h5 class="w3-text-grey w3-margin-right w3-padding-16">
+                <a class="go_other_list" href="/routine">
+                  반복 일정
+                  <i class="fa fa-arrow-right"></i>
+                </a>
+              </h5>
+            </div>
+            <!--이벤트 상세-->
+            <div class="w3-container">
+              {% for event in events %} {# {{ loop.index }} #}
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <h4 style="padding-left: 1px" class="w3-opacity">
+                  <b>혹한기 대비 회의 참여</b>
+                </h4>
+                <button
+                  style="position: relative; z-index: 100"
+                  class="cancle_button"
+                >
+                  <i
+                    id="cancel_button_{{ loop.index-1 }}"
+                    class="fa fa-close"
+                  ></i>
+                </button>
+              </div>
+              <div style="font-size: 1rem" class="font_color">
+                <div>
+                  <i
+                    style="position: relative; top: 1px"
+                    class="fa fa-calendar fa-fw"
+                  ></i>
+                  2022년 10월 11일
+                </div>
+                <div><i class="fa fa-clock-o fa-fw"></i> 10시 30분</div>
+              </div>
+              <p style="padding-left: 2px" class="w3-opacity">
+                혹한기 대비 아침 제설 회의를 하기로 했다.
+              </p>
+              {% if loop.last %}
+              <div style="margin-bottom: 3rem"></div>
+              {% else %}
+              <hr />
+              {% endif %} {% endfor %}
+            </div>
+            <button id="top_button">
+              <i style="color: white" class="fa fa-arrow-up"></i>
+            </button>
+            <!-- End Right Column -->
+          </div>
+
+          <!-- End Grid -->
+        </div>
+
+        <!-- End Page Container -->
+      </div>
+    </div>
+
+    <footer class="w3-container w3-center w3-margin-top">
+      <h4 style="color: white">일정 관리는 다우인의 기본입니다</h4>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const cancelConfirm = (event)=>{
+          console.log(event.target)
+          Swal.fire({
+            icon: 'question',
+            title: '일정 삭제',
+            text: '정말 삭제하시겠습니까?',
+            showCancelButton: true,
+            iconColor: '#FF4D4D',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+            confirmButtonColor:'#FF4D4D',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+              icon: 'success',
+              title: '삭제 완료',
+              text: '삭제가 완료되었습니다!',
+              iconColor: '#2284c3',
+              confirmButtonText: '확인',
+              confirmButtonColor:'#2284c3'
+              }).then((result)=>{
+                window.location.href = "/event"
+              })
+            }
+          })
+        }
+
+        for (let i=0; i < {{ events | tojson }}.length; i++ ) {
+          const cancelButton = document.querySelector(`#cancel_button_${i}`)
+          cancelButton.addEventListener('click', cancelConfirm)
+        }
+
+      const topButton = document.querySelector('#top_button')
+      topButton.addEventListener('click', topFunction)
+      function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        const eventList = document.querySelector('#event_list')
+        eventList.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
+  </body>
+</html>
