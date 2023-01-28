@@ -29,6 +29,7 @@ def result():
             return render_template("user.html", isLoginned=isLoginned)
 
         else:
+            print("here")
             return render_template("login.html", isLoginned=isLoginned)
 
 

@@ -3,7 +3,7 @@
       <form action = "/login" method = "POST">
         <p>id: <input type = "text" name = "id" /></p>
         <p>pw: <input type = "text" name = "pw" /></p>
-         {% if isLoggined is sameas false %}
+         {% if isLoginned is sameas false %}
             <p> 유효하지 않은 로그인 정보입니다. </p>
          {% endif %}
         <p><input type = "submit" value = "저장" /></p>
