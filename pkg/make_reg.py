@@ -5,32 +5,32 @@ import pymysql
 
 # 2. 비정기 스케쥴 등록하기
 #서버에서 받아오기
-days = ['mon', 'tue', 'wed',' thu', 'fri','sat','sun']
-for day in days:
-    if day in request.form.keys():
-        print(request.form[f'{day}'])
-
-
 
 def get_info_reg():
-    days = ['mon', 'tue', 'wed',' thu', 'fri','sat','sun']
+    days = ['mon', 'tue', 'wed','thu','fri','sat','sun']
+    decimal = 0
+    i = 64
     for day in days:
         if day in request.form.keys():
-            print(request.form[f'{day}'])
-
-    sc_email = request.form['event_email'] #사용자 이메일
+            decimal += i
+            i = int(i/2)
+        else:
+            i = int(i/2)
+            continue
+    
+    sc_day = decimal
+    sc_email = '22' #사용자 이메일
 #    sc_day = request.form['event_day']
     sc_title = request.form['event_title'] #일정 제목
     sc_content = request.form['event_content'] #일정 내용
-    
-    return (sc_email, sc_title, sc_content)
+    return (sc_email, sc_day, sc_title, sc_content)
 
 
  
 # 쿼리 추가
 def make_reg():
     email = get_info_reg()[0]
-    day = get_info_reg()[1]
+    day = int(get_info_reg()[1])
     title = get_info_reg()[2]
     content = get_info_reg()[3]
     
