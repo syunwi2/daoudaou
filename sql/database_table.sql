@@ -4,7 +4,7 @@ CREATE TABLE USER(
 	NAME VARCHAR(10),
     PASSWORD VARCHAR(20)
 );
-alter table USER modify EMAIL VARCHAR(100) INT primary key;
+alter table USER modify EMAIL VARCHAR(100) primary key;
 alter table USER modify EMAIL VARCHAR(100) FIRST;
 
 CREATE TABLE EVENT(
