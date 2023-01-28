@@ -6,8 +6,20 @@ conn = pymysql.connect(host = 'localhost',
                        db = 'daoudaou',
                        charset = 'utf8')
 cur = conn.cursor()
-    
+
+
+
+my_list = [
+        {
+            "datetime": "10월 7일 10시 30분",
+            "title": "워 할까요?",
+            "content": "이야호",
+        },
+    ]
+
 # 비정기 일정 조회    
+dict = {}
+
 sql_view1 = 'select * from event order by datetime'
 cur.execute(sql_view1)
 

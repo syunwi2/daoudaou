@@ -26,4 +26,6 @@ CREATE TABLE ROUTINE(
 alter table routine add ROUTINE_KEY INT primary key;
 alter table routine modify ROUTINE_KEY INT FIRST;
 alter table routine modify ROUTINE_KEY int not null auto_increment;
+
+
 INSERT INTO USER VALUES("ROOT", "ROOT", "ROOOT");

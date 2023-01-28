@@ -8,7 +8,6 @@ import pymysql
 def get_info_reg():
     sc_email = request.form['event_email'] #사용자 이메일
     sc_day = request.form['event_day']
-    # sc_time = request.args.get('time') # 정기 일정은 시간 안받나요????
     sc_title = request.form['event_title'] #일정 제목
     sc_content = request.form['event_content'] #일정 내용
     
@@ -36,3 +35,4 @@ def make_reg():
     conn.commit()
     conn.close()
     
+
