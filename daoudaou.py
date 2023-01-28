@@ -9,6 +9,8 @@ app = Flask(__name__)
 """
     로그인 페이지
 """
+
+
 @app.route("/")
 def firstpage():
     return User.firstpage()
@@ -18,6 +20,8 @@ def firstpage():
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
+
+
 @app.route("/login", methods=["POST", "GET"])
 def result():
     if request.method == "POST":
@@ -56,13 +60,25 @@ def routine():
     return render_template("routine.html", events=my_list)
 
 
-# @app.route("/send_event")
 @app.route("/send_event", methods=["POST"])
 def send_event():
     make_irreg.get_info_irreg()
     make_irreg.make_irreg()
     my_list=[]
     return render_template("event.html", events=my_list)
+
+
+@app.route("/send_routine", methods=["POST"])
+def send_routine():
+    print(request.form)
+    my_list = [
+        {
+            "datetime": "10월 7일 10시 30분",
+            "title": "워 할까요?",
+            "content": "이야호",
+        },
+    ]
+    return render_template("routine.html", events=my_list)
 
 
 if __name__ == "__main__":
