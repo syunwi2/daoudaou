@@ -3,6 +3,7 @@ import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
 from pkg.mail import sched_del_event, sched_send
+from pkg import User
 
 app = Flask(__name__)
 app.secret_key = "Key"
@@ -59,8 +60,10 @@ def logout():
 
 @app.route("/event")
 def event():
+    user_name = make_irreg.get_name()
     my_list = make_irreg.irreg_view()
-    return render_template("event.html", events=my_list)
+    print(user_name)
+    return render_template("event.html", events=my_list, name=user_name)
 
 
 """
@@ -71,6 +74,7 @@ def event():
 @app.route("/routine")
 def routine():
     page = True
+    user_name = make_irreg.get_name()
     my_list = make_reg.reg_view()
     day_list = ["월", "화", "수", "목", "금", "토", "일"]
     for routine in my_list:
@@ -82,7 +86,7 @@ def routine():
             if day_number[i] == "1":
                 my_day_list.append(day_list[i])
         routine["routine_day"] = ", ".join(my_day_list)
-    return render_template("routine.html", events=my_list)
+    return render_template("routine.html", events=my_list, name=user_name)
 
 
 @app.route("/send_event", methods=["POST"])
