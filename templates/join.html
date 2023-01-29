@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SIGNUP</title>
+    </head>
+    <body>
+        <form action = "/join" method = "POST">
+        <h1>Hello! Sign Up Here</h1>
+        <hr>
+            <b>ID</b><br>
+            {% if noID is sameas true %}
+            <p>아이디를 입력해주세요.</p>
+            {% endif %}
+            <input id="text" type="text" name="id" placeholder="이메일"><br>
+            <b>name</b><br>
+            {% if noName is sameas true %}
+            <p>이름을 입력해주세요.</p>
+            {% endif %}
+            <input id="text" type="name" name="name" placeholder="이름"><br>
+            <b>PW</b><br>
+            {% if noPW is sameas true %}
+            <p>비밀번호를 입력해주세요.</p>
+            {% endif %}
+            <input id="text" type="password" name="pw" placeholder="비밀번호"><br>
+            <b>PW check</b><br>
+            {% if noPW2 is sameas true %}
+            <p>비밀번호를 확인해주세요.</p>
+            {% endif %}
+            <input id="text" type="password" name="pw2" placeholder="비밀번호 확인"><br>
+            {% if isPWsame is sameas false %}
+            <p>비밀번호가 일치하지 않습니다.</p>
+            {% endif %}
+            <p><input type = "submit" value = "회원 가입" /></p>
+        </form>
+    </body>
+</html>

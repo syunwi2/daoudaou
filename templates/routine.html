@@ -45,30 +45,53 @@
                 </div>
               </div>
             <div style="padding-top:0.2rem;" class="form_area">
-              <form class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
+              <form 
+              action="/send_routine"
+              method="post" class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>제목</b></label>
-                  <input class="w3-input" type="text">
+                  <input name="event_title" class="w3-input" type="text">
                 </div>
                 <div class="form_inputs">
                     <label class="w3-text-blue form_labels"><b>요일</b></label>
-                    <div style="display:flex; justify-content: space-around;" >
-                      <div style="display:flex; justify-content: space-around;">
-                        <input id="event_date" style="" class="w3-input" type="checkbox">
+                    <div style="display:flex; justify-content: space-around; margin-top:0.5rem;" >
+                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
+                        <label style="position:relative; right:1px; color:rgb(95, 95, 95);" for="mon">월</label>
+                        <input id="mon" name="mon"  class="w3-input" type="checkbox">
+                      </div>
+                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
+                        <label style="position:relative; color:rgb(95, 95, 95);" for="tue">화</label>
+                        <input id="tue" name="tue"  class="w3-input" type="checkbox">
+                      </div>
+                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
+                        <label style="position:relative; color:rgb(95, 95, 95);" for="wed">수</label>
+                        <input id="wed" name="wed"  class="w3-input" type="checkbox">
+                      </div>
+                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
+                        <label style="position:relative; color:rgb(95, 95, 95);" for="thu">목</label>
+                        <input id="thu" name="thu"  class="w3-input" type="checkbox">
+                      </div>
+                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
+                        <label style="position:relative; right:1px; color:rgb(95, 95, 95);" for="fri">금</label>
+                        <input id="fri" name="fri"  class="w3-input" type="checkbox">
+                      </div>
+                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
+                        <label style="position:relative; color:rgb(95, 95, 95);" for="sat">토</label>
+                        <input id="sat" name="sat"  class="w3-input" type="checkbox">
+                      </div>
+                      <div style="display:flex; flex-direction:column; ">
+                        <label style="position:relative; right:1px; color:rgb(95, 95, 95);" for="sun">일</label>
+                        <input id="sun" name="sun"  class="w3-input" type="checkbox">
                       </div>
                     </div>
-                    {% if {{}} %}
-                    
-                    {% else %}
-                    {% endif %}
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>시간</b></label>
-                  <input id="event_date" style="" class="w3-input" type="time">
+                  <input name="event_time" class="w3-input" type="time">
                 </div>
                 <div class="form_inputs">
-                  <label style="" class="w3-text-blue form_labels"><b>내용</b></label>
-                  <textarea id="event_content" style="
+                  <label  class="w3-text-blue form_labels"><b>내용</b></label>
+                  <textarea name="event_content" style="
                     margin-top: 0.5rem;
                     width: 100%;
                     height: 100px;
@@ -206,7 +229,7 @@
               confirmButtonText: '확인',
               confirmButtonColor:'#2284c3'
               }).then((result)=>{
-                window.location.href = "/event"
+                window.location.href = "/routine"
               })
             }
           })
