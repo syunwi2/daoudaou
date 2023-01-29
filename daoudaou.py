@@ -5,6 +5,7 @@ from pkg import make_reg
 from pkg.mail import sched_del_event, sched_send
 
 app = Flask(__name__)
+app.secret_key = "Key"
 
 
 """
@@ -12,8 +13,6 @@ app = Flask(__name__)
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
-
-
 @app.route("/", methods=["POST", "GET"])
 def firstpage():
     if request.method == "POST":
@@ -27,8 +26,6 @@ def firstpage():
 """
     회원 가입 
 """
-
-
 @app.route("/join", methods=["POST", "GET"])
 def join():
     if request.method == "POST":
@@ -39,6 +36,14 @@ def join():
         return User.join(id, name, pw, pw2)
     else:
         return User.joinPage()
+
+
+"""
+    로그아웃
+"""
+@app.route("/logout")
+def logout():
+    return User.logout()
 
 
 """
