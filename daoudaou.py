@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request
 import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
