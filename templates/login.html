@@ -1,13 +1,13 @@
 <html>
    <body>
-      <form action = "/login" method = "POST">
+      {% if isLoginned is sameas false %}
+         <p> 유효하지 않은 로그인 정보입니다. </p>
+      {% endif %}
+      <form action = "/" method = "POST">
         <p>e-mail: <input type = "text" name = "id" /></p>
         <p>pw: <input type = "text" name = "pw" /></p>
-         {% if isLoginned is sameas false %}
-            <p> 유효하지 않은 로그인 정보입니다. </p>
-         {% endif %}
         <p><input type = "submit" value = "로그인" /></p>
       </form>
-      <a class="p-2 text-muted" href="/joinpage">회원가입</a>
+      <a class="p-2 text-muted" href="/join">회원가입</a>
    </body>
 </html>
