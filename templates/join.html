@@ -8,7 +8,11 @@
         <h1>Hello! Sign Up Here</h1>
         <hr>
             <b>ID</b><br>
-            {% if noID is sameas true %}
+            {% if isEmailExist is sameas true %}
+            <p>이미 사용 중인 아이디입니다.</p>
+            {% elif isUnvalidEmail is sameas true %}
+            <p>사용 가능한 이메일을 입력해주세요.</p>
+            {% elif noID is sameas true %}
             <p>아이디를 입력해주세요.</p>
             {% endif %}
             <input id="text" type="text" name="id" placeholder="이메일"><br>

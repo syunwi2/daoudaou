@@ -1,20 +1,5 @@
-import pymysql
+import pkg.Conn as Conn
 from flask import render_template
-
-"""
-    openConn
-    open Connection to DB Server
-    parameter : None
-    return : connection object
-"""
-def openConn():
-    conn = pymysql.connect(host = 'localhost',
-        user ='root',
-        password = 'root1234',
-        db = 'daoudaou',
-        charset = 'utf8')
-    cur = conn.cursor()
-    return conn, cur
 
 """
     firstpage
@@ -34,13 +19,13 @@ def firstpage():
 def login(id, pw):
     isLoginned = test_login(id, pw)
 
-    # 수정 필요
+    # Problem : render hwat?
     if isLoginned:
         my_list = [
             {
-            "datetime": "10월 7일 10시 30분",
-            "title": "뭐 할까요?",
-            "content": "야호",
+            "datetime": "10?�� 7?�� 10?�� 30�?",
+            "title": "�? ?��까요?",
+            "content": "?��?��",
             },
         ]
         return render_template("event.html", events=my_list)
@@ -55,7 +40,7 @@ def login(id, pw):
     return : True/False
 """
 def test_login(id, pw):
-    conn, cur = openConn()
+    conn, cur = Conn.open()
     
     IDquery = f'SELECT EMAIL FROM USER WHERE EMAIL = "{id}";'
     numID = cur.execute(IDquery)
@@ -89,41 +74,105 @@ def joinPage():
     return : (html template)
 """
 def join(id, name, pw, pw2):
-    print(id, name, pw, pw2)
 
+    # --- CHECK THE FORM ---
+    # if there is blank in form, show notification.
+    noID, noName, noPW, noPW2 = isBlankInForm(id, name, pw, pw2)
+    if noID or noName or noPW or noPW2:
+        return render_template("join.html", noID=noID, noName=noName, noPW=noPW, noPW2=noPW2)
+
+    # if there is no blank in form, check the email is valid.
+    unvalidID = isIDunvalid(id)
+    if unvalidID:
+        return render_template("join.html", isUnvalidEmail=True)
+
+    # if email is valid, check the email is ued.
+    usedID = isIDused(id)
+    if usedID:
+        return render_template("join.html", isEmailExist=True)
+
+    # if pw and pw2 is different, show notification.
+    isPWsame = (pw == pw2)
+    if isPWsame is False:
+        return render_template("join.html", isPWsame=False)
+
+    # --- INSERT CATA INTO DB ---
+    # if there is no problem in form, insert values in DB.
+    if not usedID and isPWsame:
+        if insertData(id, name, pw):
+            return render_template("login.html", isLoginned=None)
+        else:
+            return render_template("join.html")
+
+"""
+    isBlankInForm
+    get data from user and check is it completed.
+    parameter : id, name, pw, pw2
+    return : tuple of (True/False)
+"""
+def isBlankInForm(id, name, pw, pw2):
     noID, noName, noPW, noPW2 = False, False, False, False
+
     if id is "":
         noID=True
     if name is "":
         noName=True
     if pw is "":
         noPW=True
-    if pw is not "" and pw2 is "":
-        noPW=False
+    if (noPW is False) and (pw2 is ""):
         noPW2=True
-    if noID or noName or noPW or noPW2:
-        return render_template("join.html", noID=noID, noName=noName, noPW=noPW, noPW2=noPW2)
 
-    conn, cur = openConn()
+    return noID, noName, noPW, noPW2
 
+"""
+    isIDunvalid
+    check the input id value is valid.
+    parameter : id
+    return : (True/False)    
+"""
+def isIDunvalid(id):
+    numAt = id.count('@')
+    if numAt != 1:
+        return True
+    else:
+        numDot = id.split('@')[1].count('.')
+        if numDot < 1:
+            return True
+        else:
+            return False 
+
+"""
+    isIDused
+    check the input id value is already in DB.
+    parameter : id
+    return : (True/False)    
+"""
+def isIDused(id):
+    isIDused = True
+
+    conn, cur = Conn.open()
     idCheckQuery = f'SELECT EMAIL FROM USER WHERE EMAIL = "{id}";'
     numID = cur.execute(idCheckQuery)
-    if numID is 1:
-        return render_template("join.html", isEmailExist=True)
 
-    isPWsame = (pw == pw2)
-    if isPWsame is False:
-        return render_template("join.html", isPWsame=False)
+    if numID == 1:
+        conn.close()
+        return isIDused
+    else:
+        isIDused = False
+        conn.close()
+        return isIDused
 
-    if (numID is 0) and isPWsame:
+"""
+    insertData
+    insert id, name, pw value into DB
+    return : True
+"""
+def insertData(id, name, pw):
+        conn, cur = Conn.open()
+
         insertQuery = f'INSERT INTO USER VALUES("{id}", "{name}", "{pw}");'
-        print(insertQuery)
         cur.execute(insertQuery)
         conn.commit()
 
-        idCheckQuery = f'SELECT EMAIL FROM USER WHERE EMAIL = "{id}";'
-        numID = cur.execute(idCheckQuery)
-        print(numID)
-
         conn.close()
-        return render_template("login.html", isLoginned=None)
+        return True
