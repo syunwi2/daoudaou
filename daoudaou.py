@@ -13,6 +13,8 @@ app.secret_key = "Key"
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
+
+
 @app.route("/", methods=["POST", "GET"])
 def firstpage():
     if request.method == "POST":
@@ -26,6 +28,8 @@ def firstpage():
 """
     회원 가입 
 """
+
+
 @app.route("/join", methods=["POST", "GET"])
 def join():
     if request.method == "POST":
@@ -41,6 +45,8 @@ def join():
 """
     로그아웃
 """
+
+
 @app.route("/logout")
 def logout():
     return User.logout()
@@ -76,6 +82,7 @@ def routine():
             if day_number[i] == "1":
                 my_day_list.append(day_list[i])
         routine["routine_day"] = ", ".join(my_day_list)
+    print(my_list)
     return render_template("routine.html", events=my_list)
 
 
