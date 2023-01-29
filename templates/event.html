@@ -37,10 +37,12 @@
               <div style="padding-top:0.5rem;" class="greeting">
                 <div style="position:relative; padding:1.15rem; text-align:center; padding">
                   <button id="logout_button">
-                    <i style="color:crimson ; transform: scaleX(-1);" class="material-icons">exit_to_app</i>
+                    <a href="/logout">
+                      <i style="color:crimson ; transform: scaleX(-1);" class="material-icons">exit_to_app</i>
+                    </a>
                   </button>                
                   <h3 class="w3-text-blue">
-                    안녕하세요! {{ name }} 박초롱님!
+                    안녕하세요! {{ name }}님!
                   </h3>
                 </div>
               </div>
@@ -51,15 +53,15 @@
               class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>제목</b></label>
-                  <input name="event_title" class="w3-input" type="text">
+                  <input name="event_title" class="w3-input" type="text" required>
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>날짜</b></label>
-                  <input name="event_date" style="" class="w3-input" type="date">
+                  <input name="event_date" style="" class="w3-input" type="date" required>
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>시간</b></label>
-                  <input name="event_time" style="" class="w3-input" type="time">
+                  <input name="event_time" style="" class="w3-input" type="time" required>
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>내용</b></label>
@@ -74,6 +76,7 @@
                     background-color: #f8f8f8;
                     font-size: 16px;
                     resize: none;" 
+                    placeholder="상세 내용을 적어주세요(선택사항)"
                   ></textarea>
                 </div>
                 <div style="display:flex; justify-content:center; margin-bottom:1rem;" class="form_inputs">
@@ -130,14 +133,14 @@
                 "
               >
                 <h4 style="padding-left: 1px" class="w3-opacity">
-                  <b>혹한기 대비 회의 참여</b>
+                  <b>{{ event.event_title }}</b>
                 </h4>
                 <button
                   style="position: relative; z-index: 100"
                   class="cancle_button"
                 >
                   <i
-                    id="cancel_button_{{ loop.index-1 }}"
+                    id="cancel_button_{{ event.event_key }}"
                     class="fa fa-close"
                   ></i>
                 </button>
@@ -148,12 +151,26 @@
                     style="position: relative; top: 1px"
                     class="fa fa-calendar fa-fw"
                   ></i>
-                  2022년 10월 11일
+                  {{ event.event_date[:4]}}년 {{ event.event_date[5:7]}}월 {{ event.event_date[8:-1]}}일
                 </div>
-                <div><i class="fa fa-clock-o fa-fw"></i>오전 10시 30분</div>
+                <div><i class="fa fa-clock-o fa-fw"></i>
+                {% if (event.event_time[:2]|int) >= 12 %}
+                  오후
+                {% else %}
+                  오전
+                {% endif %}
+                {% if (event.event_time[:2]|int) >= 12 %}
+                  {{ (event.event_time[:2]|int) - 12 }}시
+                {% else %}
+                  {{ event.event_time[:2]|int }}시
+                {% endif %}
+                  {{ event.event_time[3:5]|int }}분
+                </div>
               </div>
               <p style="padding-left: 2px" class="w3-opacity">
-                혹한기 대비 아침 제설 회의를 하기로 했다.
+              {% autoescape false %}
+                {{ event.event_content | replace('\r','<br/>') }}
+              {% endautoescape %}
               </p>
               {% if loop.last %}
               <div style="margin-bottom: 3rem"></div>
@@ -182,7 +199,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const cancelConfirm = (event)=>{
-          console.log(event.target)
           Swal.fire({
             icon: 'question',
             title: '일정 삭제',
@@ -201,7 +217,14 @@
               iconColor: '#2284c3',
               confirmButtonText: '확인',
               confirmButtonColor:'#2284c3'
-              }).then((result)=>{
+              }).then(async (result)=> {
+                const response = await axios({
+                  method: 'DELETE',
+                  url: '/erase_event',
+                  data:{
+                    key: event.target.id.slice(14),
+                  }
+                })
                 window.location.href = "/event"
               })
             }
@@ -209,12 +232,14 @@
         }
 
         for (let i=0; i < {{ events | tojson }}.length; i++ ) {
-          const cancelButton = document.querySelector(`#cancel_button_${i}`)
+          id = {{events | tojson }}[i]['event_key']
+          const cancelButton = document.querySelector(`#cancel_button_${id}`)
           cancelButton.addEventListener('click', cancelConfirm)
         }
 
       const topButton = document.querySelector('#top_button')
       topButton.addEventListener('click', topFunction)
+
       function topFunction() {
         document.body.scrollTop = 0; // For Safari
         const eventList = document.querySelector('#event_list')
