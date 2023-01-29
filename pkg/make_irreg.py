@@ -37,7 +37,7 @@ def make_irreg():
     conn.commit()
     conn.close()
     
-    
+# 2. 조회
 def irreg_view():
     conn = pymysql.connect(host = 'localhost',
                        user = 'root',
@@ -67,5 +67,24 @@ def irreg_view():
         dict['event_time'] = scd[2][11:]
         dict['event_content'] = scd[4]
         irreg_dict_list.append(dict)
+    
+    conn.close()
 
     return irreg_dict_list
+
+# 3. 일정 삭제
+def erase_event():
+    key = request.form['event_key']
+
+    conn = pymysql.connect(host = 'localhost',
+                           user = 'root',
+                           password = 'root1234',
+                           db = 'daoudaou',
+                           charset = 'utf8')
+    cur = conn.cursor()
+
+    sql_erase1 = f'delete from event where event_key = "{key}"'
+    cur.execute(sql_erase1)
+
+    conn.commit()
+    conn.close()
