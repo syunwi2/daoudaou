@@ -4,7 +4,7 @@
     <title>다우다우</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
     <link
@@ -23,7 +23,6 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/event.css') }}"
     />
-    
   </head>
   <body style="font-family: Happiness-Sans-Title" class="w3-light-grey">
     <!-- Page Container -->
@@ -33,125 +32,258 @@
         <!-- Left Column -->
         <div class="w3-third">
           <div class="w3-white w3-text-grey w3-card-4 col_min_height">
-            <div style="height:100%; display:flex; flex-direction:column; justify-content:space-around;" class="w3-container">
-              <div style="padding-top:0.5rem;" class="greeting">
-                <div style="position:relative; padding:1.15rem; text-align:center; padding">
-                  <button id="logout_button">
-                    <a href="/logout">
-                      <i style="color:crimson ; transform: scaleX(-1);" class="material-icons">exit_to_app</i>
-                    </a>
-                  </button>                
-                  <h3 class="w3-text-blue">
-                    안녕하세요! {{ name }}님!
-                  </h3>
-                </div>
-              </div>
-            <div style="padding-top:0.2rem;" class="form_area">
-              <form 
-              action="/send_routine"
-              method="post" class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
-                <div class="form_inputs">
-                  <label class="w3-text-blue form_labels"><b>제목</b></label>
-                  <input name="event_title" class="w3-input" type="text">
-                </div>
-                <div class="form_inputs">
-                    <label class="w3-text-blue form_labels"><b>요일</b></label>
-                    <div style="display:flex; justify-content: space-around; margin-top:0.5rem;" >
-                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
-                        <label style="position:relative; right:1px; color:rgb(95, 95, 95);" for="mon">월</label>
-                        <input id="mon" name="mon"  class="w3-input" type="checkbox">
-                      </div>
-                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
-                        <label style="position:relative; color:rgb(95, 95, 95);" for="tue">화</label>
-                        <input id="tue" name="tue"  class="w3-input" type="checkbox">
-                      </div>
-                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
-                        <label style="position:relative; color:rgb(95, 95, 95);" for="wed">수</label>
-                        <input id="wed" name="wed"  class="w3-input" type="checkbox">
-                      </div>
-                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
-                        <label style="position:relative; color:rgb(95, 95, 95);" for="thu">목</label>
-                        <input id="thu" name="thu"  class="w3-input" type="checkbox">
-                      </div>
-                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
-                        <label style="position:relative; right:1px; color:rgb(95, 95, 95);" for="fri">금</label>
-                        <input id="fri" name="fri"  class="w3-input" type="checkbox">
-                      </div>
-                      <div style="display:flex; flex-direction:column; justify-content: space-around;">
-                        <label style="position:relative; color:rgb(95, 95, 95);" for="sat">토</label>
-                        <input id="sat" name="sat"  class="w3-input" type="checkbox">
-                      </div>
-                      <div style="display:flex; flex-direction:column; ">
-                        <label style="position:relative; right:1px; color:rgb(95, 95, 95);" for="sun">일</label>
-                        <input id="sun" name="sun"  class="w3-input" type="checkbox">
-                      </div>
-                    </div>
-                </div>
-                <div class="form_inputs">
-                  <label class="w3-text-blue form_labels"><b>시간</b></label>
-                  <input name="event_time" class="w3-input" type="time">
-                </div>
-                <div class="form_inputs">
-                  <label  class="w3-text-blue form_labels"><b>내용</b></label>
-                  <textarea name="event_content" style="
-                    margin-top: 0.5rem;
-                    width: 100%;
-                    height: 100px;
-                    padding: 12px 20px;
-                    box-sizing: border-box;
-                    border: 2px solid #ccc;
-                    border-radius: 4px;
-                    background-color: #f8f8f8;
-                    font-size: 16px;
-                    resize: none;" 
-                  ></textarea>
-                </div>
-                <div style="display:flex; justify-content:center; margin-bottom:1rem;" class="form_inputs">
-                  <button style="background-color:#2284c3; color:white" class="w3-button w3-round w3-hover-blue">등록</button> 
-                </div>             
-              </form>        
-            </div>
-          </div>
-        </div>
-        <!-- End Left Column -->
-      </div>
-
-      <!-- Right Column -->
-      <div class="w3-twothird">
-        <div style="width: 100%; height: 100%; position: relative">
-          <div
-            id="event_list"
-            class="w3-container w3-card w3-white w3-margin-bottom col_min_height"
-          >
             <div
               style="
+                height: 100%;
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
+                flex-direction: column;
+                justify-content: space-around;
               "
+              class="w3-container"
             >
-              <h2
-                style="display: flex; align-items: center"
-                class="w3-text-grey w3-margin-left w3-padding-16"
-              >
-                <i
-                  style="margin-right: 1rem"
-                  class="material-icons w3-xxlarge font_color"
-                  >all_inclusive</i
+              <div style="padding-top: 0.5rem" class="greeting">
+                <div
+                  style="position:relative; padding:1.15rem; text-align:center; padding"
                 >
-                <span class="font_color"> <b> 반복 일정</b> </span>
-              </h2>
-              {# 리스트 바꾸는 버튼 #}
-              <h5 class="w3-text-grey w3-margin-right w3-padding-16">
-                <a class="go_other_list" href="/event">
-                  일회성 일정
-                  <i class="fa fa-arrow-right"></i>
-                </a>
-              </h5>
+                  <button id="logout_button">
+                    <a href="/logout">
+                      <i
+                        style="color: crimson; transform: scaleX(-1)"
+                        class="material-icons"
+                        >exit_to_app</i
+                      >
+                    </a>
+                  </button>
+                  <h3 class="w3-text-blue">안녕하세요! {{ name }}님!</h3>
+                </div>
+              </div>
+              <div style="padding-top: 0.2rem" class="form_area">
+                <form
+                  id="routine_form"
+                  action="/send_routine"
+                  method="post"
+                  class="w3-containe"
+                  style="
+                    height: 95%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: center;
+                  "
+                  action=""
+                >
+                  <div class="form_inputs">
+                    <label class="w3-text-blue form_labels"><b>제목</b></label>
+                    <input name="event_title" class="w3-input" type="text" />
+                  </div>
+                  <div class="form_inputs">
+                    <label class="w3-text-blue form_labels"><b>요일</b></label>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-around;
+                        margin-top: 0.5rem;
+                      "
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                        "
+                      >
+                        <label
+                          style="
+                            position: relative;
+                            right: 1px;
+                            color: rgb(95, 95, 95);
+                          "
+                          for="mon"
+                          >월</label
+                        >
+                        <input
+                          id="mon"
+                          name="mon"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                        "
+                      >
+                        <label
+                          style="position: relative; color: rgb(95, 95, 95)"
+                          for="tue"
+                          >화</label
+                        >
+                        <input
+                          id="tue"
+                          name="tue"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                        "
+                      >
+                        <label
+                          style="position: relative; color: rgb(95, 95, 95)"
+                          for="wed"
+                          >수</label
+                        >
+                        <input
+                          id="wed"
+                          name="wed"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                        "
+                      >
+                        <label
+                          style="position: relative; color: rgb(95, 95, 95)"
+                          for="thu"
+                          >목</label
+                        >
+                        <input
+                          id="thu"
+                          name="thu"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                        "
+                      >
+                        <label
+                          style="
+                            position: relative;
+                            right: 1px;
+                            color: rgb(95, 95, 95);
+                          "
+                          for="fri"
+                          >금</label
+                        >
+                        <input
+                          id="fri"
+                          name="fri"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                        "
+                      >
+                        <label
+                          style="position: relative; color: rgb(95, 95, 95)"
+                          for="sat"
+                          >토</label
+                        >
+                        <input
+                          id="sat"
+                          name="sat"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                      <div style="display: flex; flex-direction: column">
+                        <label
+                          style="
+                            position: relative;
+                            right: 1px;
+                            color: rgb(95, 95, 95);
+                          "
+                          for="sun"
+                          >일</label
+                        >
+                        <input
+                          id="sun"
+                          name="sun"
+                          class="w3-input days"
+                          type="checkbox"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form_inputs">
+                    <label class="w3-text-blue form_labels"><b>시간</b></label>
+                    <input
+                      name="event_time"
+                      class="w3-input"
+                      type="time"
+                      required
+                    />
+                  </div>
+                  <div class="form_inputs">
+                    <label class="w3-text-blue form_labels"><b>내용</b></label>
+                    <textarea
+                      name="event_content"
+                      style="
+                        margin-top: 0.5rem;
+                        width: 100%;
+                        height: 100px;
+                        padding: 12px 20px;
+                        box-sizing: border-box;
+                        border: 2px solid #ccc;
+                        border-radius: 4px;
+                        background-color: #f8f8f8;
+                        font-size: 16px;
+                        resize: none;
+                      "
+                      placeholder="상세 내용을 적어주세요(선택사항)"
+                    ></textarea>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      margin-bottom: 1rem;
+                    "
+                    class="form_inputs"
+                  >
+                    <button
+                      style="background-color: #2284c3; color: white"
+                      class="w3-button w3-round w3-hover-blue"
+                    >
+                      등록
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <!--이벤트 상세-->
-            <div class="w3-container">
-              {% for event in events %} {# {{ loop.index }} #}
+          </div>
+          <!-- End Left Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-twothird">
+          <div style="width: 100%; height: 100%; position: relative">
+            <div
+              id="event_list"
+              class="w3-container w3-card w3-white w3-margin-bottom col_min_height"
+            >
               <div
                 style="
                   display: flex;
@@ -159,44 +291,71 @@
                   align-items: center;
                 "
               >
-                <h4 style="padding-left: 1px" class="w3-opacity">
-                  <b>{{ event.routine_title }}</b>
-                </h4>
-                <button
-                  style="position: relative; z-index: 100"
-                  class="cancle_button"
+                <h2
+                  style="display: flex; align-items: center"
+                  class="w3-text-grey w3-margin-left w3-padding-16"
                 >
                   <i
-                    id="cancel_button_{{ event.routine_key }}"
-                    class="fa fa-close"
-                  ></i>
-                </button>
+                    style="margin-right: 1rem"
+                    class="material-icons w3-xxlarge font_color"
+                    >all_inclusive</i
+                  >
+                  <span class="font_color"> <b> 반복 일정</b> </span>
+                </h2>
+                {# 리스트 바꾸는 버튼 #}
+                <h5 class="w3-text-grey w3-margin-right w3-padding-16">
+                  <a class="go_other_list" href="/event">
+                    일회성 일정
+                    <i class="fa fa-arrow-right"></i>
+                  </a>
+                </h5>
               </div>
-              <div style="font-size: 1rem" class="font_color">
-                <div>
-                  <i
-                    style="position: relative; top: 1px"
-                    class="fa fa-calendar fa-fw"
-                  ></i>
-                  {{ event.routine_day }}
+              <!--이벤트 상세-->
+              <div class="w3-container">
+                {% for event in events %}
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <h4 style="padding-left: 1px" class="w3-opacity">
+                    <b>{{ event.routine_title }}</b>
+                  </h4>
+                  <button
+                    style="position: relative; z-index: 100"
+                    class="cancle_button"
+                  >
+                    <i
+                      id="cancel_button_{{ event.routine_key }}"
+                      class="fa fa-close"
+                    ></i>
+                  </button>
                 </div>
-                <div><i class="fa fa-clock-o fa-fw"></i>                
-                {% if (event.routine_time[:2]|int) >= 12 %}
-                  오후
-                {% else %}
-                  오전
+                <div style="font-size: 1rem" class="font_color">
+                  <div>
+                    <i
+                      style="position: relative; top: 1px"
+                      class="fa fa-calendar fa-fw"
+                    ></i>
+                    {{ event.routine_day }}
+                  </div>
+                  <div>
+                    <i class="fa fa-clock-o fa-fw"></i>
+                    {% if (event.routine_time[:2]|int) >= 12 %} 오후 {% else %}
+                    오전 {% endif %} {% if (event.routine_time[:2]|int) >= 12 %}
+                    {{ (event.routine_time[:2]|int) - 12 }}시 {% else %} {{
+                    event.routine_time[:2]|int }}시 {% endif %} {% if
+                    (event.routine_time[3:5]|int) == 0 %}
+                  </div>
+                  {% else %} {{ event.routine_time[3:5]|int }}분
+                </div>
                 {% endif %}
-                {% if (event.routine_time[:2]|int) >= 12 %}
-                  {{ (event.routine_time[:2]|int) - 12 }}시
-                {% else %}
-                  {{ event.routine_time[:2]|int }}시
-                {% endif %}
-                  {{ event.routine_time[3:5]|int }}분</div>
               </div>
               <p style="padding-left: 2px" class="w3-opacity">
-                {% autoescape false %}
-                  {{ event.routine_content | replace('\r','<br/>') }}
-                {% endautoescape %}
+                {% autoescape false %} {{ event.routine_content |
+                replace('\r','<br />') }} {% endautoescape %}
               </p>
               {% if loop.last %}
               <div style="margin-bottom: 3rem"></div>
@@ -220,10 +379,33 @@
     <footer class="w3-container w3-center w3-margin-top">
       <h4 style="color: white">일정 관리는 다우인의 기본입니다</h4>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const routineForm = document.querySelector('#routine_form')
+
+
+
+        routineForm.addEventListener('submit', (event)=>{
+          const daysInput = document.querySelectorAll('.days:checked')
+          if (!daysInput.length) {
+            event.preventDefault()
+            Swal.fire({
+              icon: 'warning',
+              iconColor: '#2284c3',
+              title: '필수 입력',
+              text: '요일을 입력해 주셔야 합니다',
+              confirmButtonText: '확인',
+              confirmButtonColor:'#2284c3',
+            })
+          }
+        })
+
         const cancelConfirm = (event)=>{
           Swal.fire({
             icon: 'question',
@@ -248,7 +430,7 @@
                   method: 'DELETE',
                   url: '/erase_routine',
                   data:{
-                    key: event.target.id.at(-1),
+                    key: event.target.id.slice(14),
                   }
                 })
                 window.location.href = "/routine"
@@ -257,15 +439,15 @@
           })
         }
 
-        for (let i=0; i < {{ events | tojson }}.length; i++ ) {
-          id = {{ events | tojson }}[i]['routine_key']
-          const cancelButton = document.querySelector(`#cancel_button_${id}`)
-          cancelButton.addEventListener('click', cancelConfirm)
-        }
+      for (let i=0; i < {{ events | tojson }}.length; i++ ) {
+        id = {{ events | tojson }}[i]['routine_key']
+        const cancelButton = document.querySelector(`#cancel_button_${id}`)
+        cancelButton.addEventListener('click', cancelConfirm)
+      }
 
       const topButton = document.querySelector('#top_button')
       topButton.addEventListener('click', topFunction)
-      
+
       function topFunction() {
         document.body.scrollTop = 0; // For Safari
         const eventList = document.querySelector('#event_list')
