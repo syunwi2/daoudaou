@@ -45,7 +45,6 @@ def irreg_view():
                        db = 'daoudaou',
                        charset = 'utf8')
     cur = conn.cursor()
-
     
     sql_view1 = 'select * from event order by datetime'
     cur.execute(sql_view1)
@@ -67,7 +66,7 @@ def irreg_view():
         dict['event_time'] = scd[2][11:]
         dict['event_content'] = scd[4]
         irreg_dict_list.append(dict)
-    
+
     conn.close()
 
     return irreg_dict_list

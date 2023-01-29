@@ -45,6 +45,7 @@ def join():
 @app.route("/event")
 def event():
     my_list = make_irreg.irreg_view()
+    print(request.form)
     return render_template("event.html", events=my_list)
 
 
