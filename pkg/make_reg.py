@@ -3,7 +3,7 @@ from flask import Flask, render_template
 from flask import request
 import pymysql
 
-# 2. 비정기 스케쥴 등록하기
+# 1. 비정기 스케쥴 등록하기
 #서버에서 받아오기
 
 def get_info_reg():
@@ -50,7 +50,7 @@ def make_reg():
     conn.commit()
     conn.close()
     
-# 조회
+# 2. 일정 조회
 def reg_view():
     conn = pymysql.connect(host = 'localhost',
                        user = 'root',
@@ -72,11 +72,30 @@ def reg_view():
         scd[5] = str(scd[5])
     for scd in schedule_list_reg:
         dict = {}
-        dict['key'] = scd[0]
+        dict['routine_key'] = scd[0]
         dict['routine_title'] = scd[3]
         dict['routine_day'] = scd[2]
         dict['routine_time'] = scd[5]
         dict['routine_content'] = scd[4]
         reg_dict_list.append(dict)
     
+    conn.commit()
+    conn.close()
     return reg_dict_list
+
+# 3. 일정 삭제
+def erase_routine():
+    key = request.form['routine_key']
+
+    conn = pymysql.connect(host = 'localhost',
+                           user = 'root',
+                           password = 'root1234',
+                           db = 'daoudaou',
+                           charset = 'utf8')
+    cur = conn.cursor()
+
+    sql_erase1 = f'delete from routine where event_key = "{key}"'
+    cur.execute(sql_erase1)
+
+    conn.commit()
+    conn.close()
