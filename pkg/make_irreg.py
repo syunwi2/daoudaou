@@ -2,13 +2,14 @@ import pymysql
 from flask import Flask, render_template
 from flask import request
 import pymysql
+from pkg import User
 
 
 # 1. 비정기 스케쥴 등록하기
 #서버에서 받아오기
 def get_info_irreg():
 
-    sc_email = '22' #사용자 이메일
+    sc_email = str(User.session['id']) #사용자 이메일
     sc_date = request.form['event_date']
     sc_time = request.form['event_time'] # 일정 날짜
     sc_title = request.form['event_title'] #일정 제목
@@ -46,7 +47,7 @@ def irreg_view():
                        charset = 'utf8')
     cur = conn.cursor()
     
-    sql_view1 = 'select * from event order by datetime'
+    sql_view1 = f"select * from event where email = '{User.session['id']}' order by datetime"
     cur.execute(sql_view1)
 
     schedule_list_irreg = []
@@ -67,6 +68,8 @@ def irreg_view():
         dict['event_content'] = scd[4]
         irreg_dict_list.append(dict)
 
+    
+    print(User.session['id'])
     conn.close()
 
     return irreg_dict_list

@@ -3,6 +3,7 @@ import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
 from pkg.mail import sched_del_event, sched_send
+from pkg import User
 
 app = Flask(__name__)
 app.secret_key = "Key"
@@ -54,7 +55,6 @@ def logout():
 @app.route("/event")
 def event():
     my_list = make_irreg.irreg_view()
-    print(request.form)
     return render_template("event.html", events=my_list)
 
 
