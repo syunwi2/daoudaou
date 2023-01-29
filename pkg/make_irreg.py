@@ -61,7 +61,7 @@ def irreg_view():
 
     for scd in schedule_list_irreg:
         dict = {}
-        dict['event_key'] = scd[0]
+        dict['key'] = scd[0]
         dict['event_title'] = scd[3]
         dict['event_date'] = scd[2][:11]
         dict['event_time'] = scd[2][11:]

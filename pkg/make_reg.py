@@ -72,7 +72,7 @@ def reg_view():
         scd[5] = str(scd[5])
     for scd in schedule_list_reg:
         dict = {}
-        dict['routine_key'] = scd[0]
+        dict['key'] = scd[0]
         dict['routine_title'] = scd[3]
         dict['routine_day'] = scd[2]
         dict['routine_time'] = scd[5]
