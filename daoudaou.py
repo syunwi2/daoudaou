@@ -56,13 +56,7 @@ def join():
 
 @app.route("/event")
 def event():
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "뭐 할까요?",
-            "content": "야호",
-        },
-    ]
+    my_list = make_irreg.irreg_view()
     return render_template("event.html", events=my_list)
 
 
@@ -74,39 +68,23 @@ def event():
 @app.route("/routine")
 def routine():
     page = True
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "워 할까요?",
-            "content": "이야호",
-        },
-    ]
+    my_list = make_reg.reg_view()
     return render_template("routine.html", events=my_list)
 
 
 @app.route("/send_event", methods=["POST"])
 def send_event():
-    print(request.form)
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "워 할까요?",
-            "content": "이야호",
-        },
-    ]
+    make_irreg.get_info_irreg()
+    make_irreg.make_irreg()
+    my_list=[]
     return render_template("event.html", events=my_list)
 
 
 @app.route("/send_routine", methods=["POST"])
 def send_routine():
-    print(request.form)
-    my_list = [
-        {
-            "datetime": "10월 7일 10시 30분",
-            "title": "워 할까요?",
-            "content": "이야호",
-        },
-    ]
+    make_reg.get_info_reg()
+    make_reg.make_reg()
+    my_list =[]
     return render_template("routine.html", events=my_list)
 
 
