@@ -5,5 +5,3 @@ __pycache__/User.cpython-310.pyc
 *.pyc
 sql/database_table.sql
 daoudaou.py
-pkg/__pycache__/make_irreg.cpython-310.pyc
-*.pyc
