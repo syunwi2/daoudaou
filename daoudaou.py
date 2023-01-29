@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
@@ -13,8 +13,6 @@ app.secret_key = "Key"
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
-
-
 @app.route("/", methods=["POST", "GET"])
 def firstpage():
     if request.method == "POST":
@@ -23,6 +21,7 @@ def firstpage():
         return User.login(id, pw)
     else:
         return User.firstpage()
+
 
 """
     회원 가입 
@@ -37,6 +36,15 @@ def join():
         return User.join(id, name, pw, pw2)
     else:
         return User.joinPage()
+
+
+"""
+    로그아웃
+"""
+@app.route("/logout")
+def logout():
+    return User.logout()
+
 
 """
     일회성 일정 페이지
