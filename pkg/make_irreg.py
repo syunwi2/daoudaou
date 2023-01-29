@@ -69,7 +69,6 @@ def irreg_view():
         irreg_dict_list.append(dict)
 
     
-    print(User.session['id'])
     conn.close()
 
     return irreg_dict_list
@@ -89,4 +88,22 @@ def erase_event():
     cur.execute(sql_erase1)
 
     conn.commit()
+    conn.close()
+    
+# 이름 받아오기
+def get_name():
+    conn = pymysql.connect(host = 'localhost',
+                           user = 'root',
+                           password = 'root1234',
+                           db = 'daoudaou',
+                           charset = 'utf8')
+    cur = conn.cursor()
+
+    sql_name = f"select NAME from user where email = '{User.session['id']}'"
+    cur.execute(sql_name)
+    name= []
+    for record in cur:
+        name.append(list(record))
+    return name[0][0]
+
     conn.close()

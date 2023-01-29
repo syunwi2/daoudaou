@@ -60,8 +60,10 @@ def logout():
 
 @app.route("/event")
 def event():
+    user_name = make_irreg.get_name()
     my_list = make_irreg.irreg_view()
-    return render_template("event.html", events=my_list)
+    print(user_name)
+    return render_template("event.html", events=my_list, name= user_name)
 
 
 """
@@ -72,6 +74,7 @@ def event():
 @app.route("/routine")
 def routine():
     page = True
+    user_name = make_irreg.get_name()
     my_list = make_reg.reg_view()
     day_list = ["월", "화", "수", "목", "금", "토", "일"]
     for routine in my_list:
@@ -84,7 +87,7 @@ def routine():
                 my_day_list.append(day_list[i])
         routine["routine_day"] = ", ".join(my_day_list)
     print(my_list)
-    return render_template("routine.html", events=my_list)
+    return render_template("routine.html", events=my_list, name = user_name)
 
 
 @app.route("/send_event", methods=["POST"])
