@@ -2,9 +2,10 @@ from flask import Flask, render_template, request
 import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
-
+from pkg.mail import sched_del_event, sched_send
 
 app = Flask(__name__)
+
 
 """
     로그인 페이지
@@ -79,6 +80,8 @@ def send_event():
     my_list=[]
     return render_template("event.html", events=my_list)
 
+sched_del_event
+sched_send
 
 @app.route("/send_routine", methods=["POST"])
 def send_routine():
