@@ -142,3 +142,7 @@ footer {
 .form_labels {
   font-size: medium;
 }
+
+textarea::placeholder {
+  color: rgb(197, 197, 197);
+}

@@ -53,15 +53,15 @@
               class="w3-containe" style="height:95%; width: 100%; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center;" action="">
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>제목</b></label>
-                  <input name="event_title" class="w3-input" type="text">
+                  <input name="event_title" class="w3-input" type="text" required>
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>날짜</b></label>
-                  <input name="event_date" style="" class="w3-input" type="date">
+                  <input name="event_date" style="" class="w3-input" type="date" required>
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>시간</b></label>
-                  <input name="event_time" style="" class="w3-input" type="time">
+                  <input name="event_time" style="" class="w3-input" type="time" required>
                 </div>
                 <div class="form_inputs">
                   <label class="w3-text-blue form_labels"><b>내용</b></label>
@@ -76,6 +76,7 @@
                     background-color: #f8f8f8;
                     font-size: 16px;
                     resize: none;" 
+                    placeholder="상세 내용을 적어주세요(선택사항)"
                   ></textarea>
                 </div>
                 <div style="display:flex; justify-content:center; margin-bottom:1rem;" class="form_inputs">
@@ -221,7 +222,7 @@
                   method: 'DELETE',
                   url: '/erase_event',
                   data:{
-                    key: event.target.id.at(-1),
+                    key: event.target.id.slice(14),
                   }
                 })
                 window.location.href = "/event"

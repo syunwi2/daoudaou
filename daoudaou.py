@@ -82,7 +82,6 @@ def routine():
             if day_number[i] == "1":
                 my_day_list.append(day_list[i])
         routine["routine_day"] = ", ".join(my_day_list)
-    print(my_list)
     return render_template("routine.html", events=my_list)
 
 
