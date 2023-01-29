@@ -37,10 +37,12 @@
               <div style="padding-top:0.5rem;" class="greeting">
                 <div style="position:relative; padding:1.15rem; text-align:center; padding">
                   <button id="logout_button">
-                    <i style="color:crimson ; transform: scaleX(-1);" class="material-icons">exit_to_app</i>
+                    <a href="/logout">
+                      <i style="color:crimson ; transform: scaleX(-1);" class="material-icons">exit_to_app</i>
+                    </a>
                   </button>                
                   <h3 class="w3-text-blue">
-                    안녕하세요! 김현영님!
+                    안녕하세요! {{ 이름 }}님!
                   </h3>
                 </div>
               </div>
