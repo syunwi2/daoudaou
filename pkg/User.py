@@ -22,6 +22,22 @@ def login(id, pw):
 
     # Problem : 데이터베이스에서 이
     if isLoginned:
+        conn, cur = Conn.open()
+    
+        TABLEquery = f'CREATE TABLE ME(EMAIL VARCHAR(100), NAME VARCHAR(10));'
+        cur.execute(TABLEquery)
+
+        print(id, type(id))
+        NAMEquery = f'SELECT NAME FROM USER WHERE EMAIL = "{id}";'
+        cur.execute(NAMEquery)
+        name = cur.fetchall()[0][0]
+        print(name)
+
+        MEquery = f'INSERT ME VALUES("{id}", "{name}")'
+        cur.execute(MEquery)
+        conn.commit()
+        conn.close()
+
         events = irreg.irreg_view()
         return render_template("event.html", events=events)
 
