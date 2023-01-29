@@ -2,13 +2,14 @@ import pymysql
 from flask import Flask, render_template
 from flask import request
 import pymysql
+from pkg import User
 
 
 # 1. 비정기 스케쥴 등록하기
 #서버에서 받아오기
 def get_info_irreg():
 
-    sc_email = '22' #사용자 이메일
+    sc_email = str(User.session['id']) #사용자 이메일
     sc_date = request.form['event_date']
     sc_time = request.form['event_time'] # 일정 날짜
     sc_title = request.form['event_title'] #일정 제목
@@ -45,9 +46,8 @@ def irreg_view():
                        db = 'daoudaou',
                        charset = 'utf8')
     cur = conn.cursor()
-
     
-    sql_view1 = 'select * from event order by datetime'
+    sql_view1 = f"select * from event where email = '{User.session['id']}' order by datetime"
     cur.execute(sql_view1)
 
     schedule_list_irreg = []
@@ -67,6 +67,7 @@ def irreg_view():
         dict['event_time'] = scd[2][11:]
         dict['event_content'] = scd[4]
         irreg_dict_list.append(dict)
+
     
     conn.close()
 
@@ -87,4 +88,22 @@ def erase_event():
     cur.execute(sql_erase1)
 
     conn.commit()
+    conn.close()
+    
+# 이름 받아오기
+def get_name():
+    conn = pymysql.connect(host = 'localhost',
+                           user = 'root',
+                           password = 'root1234',
+                           db = 'daoudaou',
+                           charset = 'utf8')
+    cur = conn.cursor()
+
+    sql_name = f"select NAME from user where email = '{User.session['id']}'"
+    cur.execute(sql_name)
+    name= []
+    for record in cur:
+        name.append(list(record))
+    return name[0][0]
+
     conn.close()

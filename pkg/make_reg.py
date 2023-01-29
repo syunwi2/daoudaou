@@ -2,6 +2,7 @@ import pymysql
 from flask import Flask, render_template
 from flask import request
 import pymysql
+from pkg import User
 
 # 1. 비정기 스케쥴 등록하기
 # 서버에서 받아오기
@@ -20,7 +21,7 @@ def get_info_reg():
             continue
 
     sc_day = decimal
-    sc_email = "22"  # 사용자 이메일
+    sc_email = str(User.session['id'])  # 사용자 이메일
     #    sc_day = request.form['event_day']
     sc_title = request.form["event_title"]  # 일정 제목
     sc_content = request.form["event_content"]  # 일정 내용
@@ -63,7 +64,7 @@ def reg_view():
     )
     cur = conn.cursor()
 
-    sql_view2 = "select * from routine order by day desc"  # 정렬 기능.. ??? 일단 앞 요일일수록 숫자 크니까 역순으로 정렬...
+    sql_view2 = f"select * from routine where email = '{User.session['id']}' order by day desc"  # 정렬 기능.. ??? 일단 앞 요일일수록 숫자 크니까 역순으로 정렬...
     cur.execute(sql_view2)
 
     schedule_list_reg = []
