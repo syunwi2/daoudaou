@@ -2,9 +2,15 @@ from flask import Flask, render_template, request
 import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
-from pkg.mail import sched_del_event, sched_send
+from pkg.mail import sched_send, sched_del_event
+# from pkg.practice_printhello import print_hello
+
+
+
 
 app = Flask(__name__)
+
+
 
 
 """
@@ -67,8 +73,6 @@ def send_event():
     my_list=[]
     return render_template("event.html", events=my_list)
 
-sched_del_event
-sched_send
 
 @app.route("/send_routine", methods=["POST"])
 def send_routine():
@@ -77,6 +81,11 @@ def send_routine():
     my_list =[]
     return render_template("routine.html", events=my_list)
 
+
+
+sched_send(app)
+sched_del_event()
+    
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
