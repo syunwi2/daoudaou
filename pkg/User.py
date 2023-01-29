@@ -1,4 +1,5 @@
 import pkg.Conn as Conn
+import pkg.make_irreg as irreg
 from flask import render_template
 
 """
@@ -19,16 +20,10 @@ def firstpage():
 def login(id, pw):
     isLoginned = test_login(id, pw)
 
-    # Problem : render hwat?
+    # Problem : 데이터베이스에서 이
     if isLoginned:
-        my_list = [
-            {
-            "datetime": "10?�� 7?�� 10?�� 30�?",
-            "title": "�? ?��까요?",
-            "content": "?��?��",
-            },
-        ]
-        return render_template("event.html", events=my_list)
+        events = irreg.irreg_view()
+        return render_template("event.html", events=events)
 
     else:
         return render_template("login.html", isLoginned=isLoginned)

@@ -9,33 +9,19 @@ app = Flask(__name__)
 
 """
     로그인 페이지
-"""
-
-
-@app.route("/")
-def firstpage():
-    return User.firstpage()
-
-
-"""
     로그인 성공 : 일정 페이지로 이동
     로그인 실패 : 로그인 페이지로 이동
 """
 
 
-@app.route("/login", methods=["POST", "GET"])
-def result():
+@app.route("/", methods=["POST", "GET"])
+def firstpage():
     if request.method == "POST":
         id = request.form["id"]
         pw = request.form["pw"]
         return User.login(id, pw)
-
-"""
-    회원 가입 페이지
-"""
-@app.route("/joinpage")
-def joinPage():
-    return User.joinPage()
+    else:
+        return User.firstpage()
 
 """
     회원 가입 
@@ -48,7 +34,8 @@ def join():
         pw = request.form["pw"]
         pw2 = request.form["pw2"]
         return User.join(id, name, pw, pw2)
-
+    else:
+        return User.joinPage()
 
 """
     일회성 일정 페이지
