@@ -5,3 +5,7 @@ __pycache__/User.cpython-310.pyc
 *.pyc
 sql/database_table.sql
 daoudaou.py
+pkg/.vs/ProjectSettings.json
+pkg/.vs/slnx.sqlite
+pkg/.vs/VSWorkspaceState.json
+pkg/.vs/pkg/v16/.suo
