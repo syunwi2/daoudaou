@@ -5,6 +5,7 @@ from pkg import make_reg
 from pkg.mail import sched_del_event, sched_send
 
 app = Flask(__name__)
+app.secret_key = "Key"
 
 
 """

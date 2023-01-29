@@ -1,15 +1,20 @@
 import pkg.Conn as Conn
 import pkg.make_irreg as irreg
-from flask import render_template
+from flask import render_template, session
 
 """
     firstpage
-    show first login page
+    show first login page if user is not loginned.
+    if user is loginned, show event page.
     parameter : None
     return : (html template)
 """
 def firstpage():
-    return render_template("login.html", isLoginned=None)
+    if 'id' in session:
+        events = irreg.irreg_view()
+        return render_template("event.html", events=events)
+    else:
+        return render_template("login.html", isLoginned=None)
   
 """
     login
@@ -22,21 +27,7 @@ def login(id, pw):
 
     # Problem : 데이터베이스에서 이
     if isLoginned:
-        conn, cur = Conn.open()
-    
-        TABLEquery = f'CREATE TABLE ME(EMAIL VARCHAR(100), NAME VARCHAR(10));'
-        cur.execute(TABLEquery)
-
-        print(id, type(id))
-        NAMEquery = f'SELECT NAME FROM USER WHERE EMAIL = "{id}";'
-        cur.execute(NAMEquery)
-        name = cur.fetchall()[0][0]
-        print(name)
-
-        MEquery = f'INSERT ME VALUES("{id}", "{name}")'
-        cur.execute(MEquery)
-        conn.commit()
-        conn.close()
+        session['id'] = id
 
         events = irreg.irreg_view()
         return render_template("event.html", events=events)
