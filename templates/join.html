@@ -76,7 +76,7 @@
               />
             </div>
             <div style="flex: 0.5; display: flex; justify-content: center">
-              {% if noID is sameas true %}
+              {% if isEmailExist is sameas true %}
               <span
                 style="
                   position: relative;
@@ -84,21 +84,65 @@
                   font-size: 0.5rem;
                   color: #ea6e6e;
                 "
-                >아이디를 입력해주세요.</span
+                >이미 사용 중인 이메일입니다.</span
               >
+              {% elif isUnvalidEmail is sameas true %}
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
+                >사용 가능한 이메일을 입력해주세요.
+              </span>
+              {% elif noID is sameas true %}
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
+                >아이디를 입력해주세요.
+              </span>
               {% elif noName is sameas true %}
-              <span style="font-size: 0.5rem; color: #ea6e6e"
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
                 >이름을 입력해주세요.
               </span>
               {% elif noPW is sameas true %}
-              <span style="font-size: 0.5rem; color: #ea6e6e"
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
                 >비밀번호를 입력해주세요.
               </span>
               {% elif noPW2 is sameas true %}
-              <span style="font-size: 0.5rem; color: #ea6e6e"
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
                 >비밀번호를 확인해주세요. </span
               >{% elif isPWsame is sameas false %}
-              <span style="font-size: 0.5rem; color: #ea6e6e"
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
                 >비밀번호가 일치하지 않습니다. </span
               >{% endif %}
             </div>
