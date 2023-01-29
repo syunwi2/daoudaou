@@ -1,13 +1,24 @@
 <html>
-   <body>
-      <form action = "/login" method = "POST">
-        <p>e-mail: <input type = "text" name = "id" /></p>
-        <p>pw: <input type = "text" name = "pw" /></p>
-         {% if isLoginned is sameas false %}
-            <p> 유효하지 않은 로그인 정보입니다. </p>
-         {% endif %}
-        <p><input type = "submit" value = "로그인" /></p>
-      </form>
-      <button onclick="location.href='join.html'">Button</button >
-   </body>
+  <head>
+    <title>다우다우</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}"
+    />
+  </head>
+  <body>
+    <div class="main_box">
+      <div class="card">
+        <form action="/login" method="POST">
+          <p>e-mail: <input type="text" name="id" /></p>
+          <p>pw: <input type="text" name="pw" /></p>
+          {% if isLoginned is sameas false %}
+          <p>유효하지 않은 로그인 정보입니다.</p>
+          {% endif %}
+          <p><input type="submit" value="로그인" /></p>
+        </form>
+        <button onclick="location.href='join.html'">Button</button>
+      </div>
+    </div>
+  </body>
 </html>
