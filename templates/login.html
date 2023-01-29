@@ -1,13 +1,88 @@
 <html>
-   <body>
-      {% if isLoginned is sameas false %}
-         <p> 유효하지 않은 로그인 정보입니다. </p>
-      {% endif %}
-      <form action = "/" method = "POST">
-        <p>e-mail: <input type = "text" name = "id" /></p>
-        <p>pw: <input type = "text" name = "pw" /></p>
-        <p><input type = "submit" value = "로그인" /></p>
-      </form>
-      <a class="p-2 text-muted" href="/join">회원가입</a>
-   </body>
+  <head>
+    <title>다우다우</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  </head>
+  <body>
+    <div class="main_box">
+      <div class="card">
+        <div class="card_inner">
+          <form class="form" action="/" method="POST">
+            <div
+              style="
+                flex: 3;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <img
+                style="width: 40%; height: auto"
+                src="{{ url_for('static', filename='image/logo.png') }}"
+              />
+            </div>
+            <div style="flex: 1.3; margin-top: 0.5rem">
+              <input
+                placeholder="이메일"
+                id="email"
+                name="id"
+                class="w3-input"
+                type="text"
+              />
+            </div>
+            <div style="flex: 1.3">
+              <input
+                placeholder="비밀번호"
+                id="password"
+                name="pw"
+                class="w3-input"
+                type="password"
+              />
+            </div>
+            <div
+              style="
+                flex: 0.7;
+                display: flex;
+                justify-content: center;
+                margin-top: 0.3rem;
+              "
+            >
+              {% if isLoginned is sameas false %}
+              <span style="font-size: 0.5rem; color: #ea6e6e"
+                >유효하지 않은 로그인 정보입니다.</span
+              >
+              {% endif %}
+            </div>
+            <div style="flex: 1; display: flex; justify-content: center">
+              <input
+                style="background-color: #2284c3; color: white"
+                class="w3-button w3-round w3-hover-blue login_button"
+                type="submit"
+                value="로그인"
+              />
+            </div>
+            <div
+              style="
+                flex: 1.3;
+                display: flex;
+                justify-content: center;
+                margin-top: 0.3rem;
+              "
+            >
+              <span style="font-size: 0.8rem; color: gray">
+                아직 회원이 아니신가요?
+                <a class="p-2 text-muted signup_button" href="/joinpage">
+                  회원가입</a
+                ></span
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
