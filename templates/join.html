@@ -1,36 +1,133 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <title>SIGNUP</title>
-    </head>
-    <body>
-        <form action = "/join" method = "POST">
-        <h1>Hello! Sign Up Here</h1>
-        <hr>
-            <b>ID</b><br>
-            {% if noID is sameas true %}
-            <p>아이디를 입력해주세요.</p>
-            {% endif %}
-            <input id="text" type="text" name="id" placeholder="이메일"><br>
-            <b>name</b><br>
-            {% if noName is sameas true %}
-            <p>이름을 입력해주세요.</p>
-            {% endif %}
-            <input id="text" type="name" name="name" placeholder="이름"><br>
-            <b>PW</b><br>
-            {% if noPW is sameas true %}
-            <p>비밀번호를 입력해주세요.</p>
-            {% endif %}
-            <input id="text" type="password" name="pw" placeholder="비밀번호"><br>
-            <b>PW check</b><br>
-            {% if noPW2 is sameas true %}
-            <p>비밀번호를 확인해주세요.</p>
-            {% endif %}
-            <input id="text" type="password" name="pw2" placeholder="비밀번호 확인"><br>
-            {% if isPWsame is sameas false %}
-            <p>비밀번호가 일치하지 않습니다.</p>
-            {% endif %}
-            <p><input type = "submit" value = "회원 가입" /></p>
-        </form>
-    </body>
+  <head>
+    <title>다우다우</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+  </head>
+  <body>
+    <div class="main_box">
+      <div class="signup_card">
+        <button class="back_button">
+          <a href="/"><span class="material-icons"> clear</span></a>
+        </button>
+        <div class="card_inner">
+          <form
+            style="position: absolute; top: 0.7rem"
+            class="form"
+            action="/join"
+            method="POST"
+          >
+            <div
+              style="
+                flex: 4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1rem;
+              "
+            >
+              <img
+                style="width: 45%; height: auto"
+                src="{{ url_for('static', filename='image/logo_signup.png') }}"
+              />
+            </div>
+            <div style="flex: 1.5; margin-top: 0.5rem">
+              <input
+                placeholder="이메일"
+                id="email"
+                name="id"
+                class="w3-input"
+                type="text"
+              />
+            </div>
+            <div style="flex: 1.5; margin-top: 0.5rem">
+              <input
+                placeholder="이름"
+                id="name"
+                name="name"
+                class="w3-input"
+                type="text"
+              />
+            </div>
+            <div style="flex: 1.5; margin-top: 0.5rem">
+              <input
+                placeholder="비밀번호"
+                id="password"
+                name="pw"
+                class="w3-input"
+                type="password"
+              />
+            </div>
+            <div style="flex: 1.5; margin-top: 0.5rem">
+              <input
+                placeholder="비밀번호 확인"
+                id="password"
+                name="pw2"
+                class="w3-input"
+                type="password"
+              />
+            </div>
+            <div style="flex: 0.5; display: flex; justify-content: center">
+              {% if noID is sameas true %}
+              <span
+                style="
+                  position: relative;
+                  top: 0.4rem;
+                  font-size: 0.5rem;
+                  color: #ea6e6e;
+                "
+                >아이디를 입력해주세요.</span
+              >
+              {% elif noName is sameas true %}
+              <span style="font-size: 0.5rem; color: #ea6e6e"
+                >이름을 입력해주세요.
+              </span>
+              {% elif noPW is sameas true %}
+              <span style="font-size: 0.5rem; color: #ea6e6e"
+                >비밀번호를 입력해주세요.
+              </span>
+              {% elif noPW2 is sameas true %}
+              <span style="font-size: 0.5rem; color: #ea6e6e"
+                >비밀번호를 확인해주세요. </span
+              >{% elif isPWsame is sameas false %}
+              <span style="font-size: 0.5rem; color: #ea6e6e"
+                >비밀번호가 일치하지 않습니다. </span
+              >{% endif %}
+            </div>
+            <div
+              style="
+                flex: 1.5;
+                display: flex;
+                justify-content: start;
+                margin-top: 1rem;
+              "
+            >
+              <input
+                style="background-color: #2284c3; color: white"
+                class="w3-button w3-round w3-hover-blue login_button"
+                type="submit"
+                value="회원가입"
+              />
+            </div>
+            <div
+              style="
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                margin-top: 0.3rem;
+              "
+            ></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
