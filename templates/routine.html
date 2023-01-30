@@ -343,13 +343,13 @@
                   </div>
                   <div>
                     <i class="fa fa-clock-o fa-fw"></i>
-                    {% if (event.routine_time[:2]|int) >= 12 %} 오후 {% else %}
-                    오전 {% endif %} {% if (event.event_time[:2]|int) >= 13 %}
-                    {{ (event.routine_time[:2]|int) - 12 }}시 {% else %} {{
-                    event.routine_time[:2]|int }}시 {% endif %} {% if
-                    (event.routine_time[3:5]|int) == 0 %}
+                    {% if (event.routine_time[:-6]|int) >= 12 %} 오후 {% else %}
+                    오전 {% endif %} {% if (event.routine_time[:-6]|int) >= 13
+                    %} {{ (event.routine_time[:-6]|int) - 12 }}시 {% else %} {{
+                    event.routine_time[:-6]|int }}시 {% endif %} {% if
+                    (event.routine_time[-5:-3]|int) == 0 %}
                   </div>
-                  {% else %} {{ event.routine_time[3:5]|int }}분
+                  {% else %} {{ event.routine_time[-5:-3]|int }}분
                 </div>
                 {% endif %}
               </div>
