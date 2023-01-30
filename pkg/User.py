@@ -1,5 +1,4 @@
 import pkg.Conn as Conn
-import pkg.make_irreg as irreg
 from flask import render_template, session, redirect, url_for
 
 """
