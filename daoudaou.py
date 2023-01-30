@@ -104,10 +104,6 @@ def send_event():
     return redirect(url_for("event"))
 
 
-sched_del_event
-sched_send
-
-
 @app.route("/send_routine", methods=["POST"])
 def send_routine():
     make_reg.get_info_reg()
@@ -132,6 +128,11 @@ def erase_routine():
     sort_of = "routine"
     make_reg.erase_routine(key, sort_of)
     return "success"
+
+
+
+sched_send(app)
+sched_del_event()
 
 
 if __name__ == "__main__":
