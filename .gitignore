@@ -14,3 +14,7 @@ pkg/__pycache__/make_irreg.cpython-310.pyc
 *.pyc
 pkg/__pycache__/make_irreg.cpython-310.pyc
 pkg/__pycache__/User.cpython-310.pyc
+pkg/.vs/ProjectSettings.json
+pkg/.vs/slnx.sqlite
+pkg/.vs/VSWorkspaceState.json
+pkg/.vs/pkg/v16/.suo
