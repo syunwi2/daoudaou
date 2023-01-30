@@ -68,10 +68,8 @@ def logout():
 def event():
     if not User.isLoginned():
         return redirect(url_for("firstpage", isLoginned=None))
-    print("Now here")
     user_name = make_irreg.get_name()
     my_list = make_irreg.irreg_view()
-    print(user_name)
     return render_template("event.html", events=my_list, name=user_name)
 
 
@@ -146,10 +144,8 @@ def erase_routine():
         else:
             return redirect(url_for("firstpage", isLoginned=None))
 
-
 # sched_send(app)
 # sched_del_event()
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=False)
