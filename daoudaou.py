@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import pkg.User as User
 from pkg import make_irreg
 from pkg import make_reg
+import pkg.mail as mail
 from pkg.mail import sched_del_event, sched_send
 from pkg import User
 
@@ -17,6 +18,10 @@ app.secret_key = "Key"
 
 @app.route("/", methods=["POST", "GET"])
 def firstpage():
+    
+    sched_send()
+    sched_del_event()
+    
     if request.method == "POST":
         id = request.form["id"]
         pw = request.form["pw"]
@@ -142,9 +147,9 @@ def erase_routine():
             return redirect(url_for("firstpage", isLoginned=None))
 
 
-sched_send(app)
-sched_del_event()
+# sched_send(app)
+# sched_del_event()
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80, debug=True)
+    app.run(host="0.0.0.0", port=80, debug=False)
