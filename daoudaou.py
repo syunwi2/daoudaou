@@ -8,7 +8,6 @@ from pkg import User
 app = Flask(__name__)
 app.secret_key = "Key"
 
-
 """
     로그인 페이지
     로그인 성공 : 일정 페이지로 이동
@@ -96,38 +95,51 @@ def routine():
     return render_template("routine.html", events=my_list, name=user_name)
 
 
-@app.route("/send_event", methods=["POST"])
+@app.route("/send_event", methods=["GET", "POST"])
 def send_event():
-    make_irreg.get_info_irreg()
-    make_irreg.make_irreg()
-    my_list = []
-    return redirect(url_for("event"))
+    if request.method == "POST":
+        make_irreg.get_info_irreg()
+        make_irreg.make_irreg()
+        my_list = []
+        return redirect(url_for("event"))
+    else:
+        return redirect(url_for("firstpage", isLoginned=None))
+        
 
 
-@app.route("/send_routine", methods=["POST"])
+@app.route("/send_routine", methods=["GET", "POST"])
 def send_routine():
-    make_reg.get_info_reg()
-    make_reg.make_reg()
-    my_list = []
-    return redirect(url_for("routine"))
+    if request.method == "POST":
+        make_reg.get_info_reg()
+        make_reg.make_reg()
+        my_list = []
+        return redirect(url_for("routine"))
+    else:
+        return redirect(url_for("firstpage", isLoginned=None))
 
 
 # 이벤트 삭제
-@app.route("/erase_event", methods=["delete"])
+@app.route("/erase_event", methods=["GET", "DELETE"])
 def erase_event():
-    key = request.get_json()["key"]
-    sort_of = "event"
-    make_reg.erase_routine(key, sort_of)
-    return "success"
+    if request.method == "DELETE":
+        key = request.get_json()["key"]
+        sort_of = "event"
+        make_reg.erase_routine(key, sort_of)
+        return "success"
+    else:
+        return redirect(url_for("firstpage", isLoginned=None))
 
 
 # 루틴 삭제
-@app.route("/erase_routine", methods=["delete"])
+@app.route("/erase_routine", methods=["GET", "DELETE"])
 def erase_routine():
-    key = request.get_json()["key"]
-    sort_of = "routine"
-    make_reg.erase_routine(key, sort_of)
-    return "success"
+        if request.method == "DELETE":
+            key = request.get_json()["key"]
+            sort_of = "routine"
+            make_reg.erase_routine(key, sort_of)
+            return "success"
+        else:
+            return redirect(url_for("firstpage", isLoginned=None))
 
 
 sched_send(app)
