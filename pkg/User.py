@@ -3,6 +3,18 @@ import pkg.make_irreg as irreg
 from flask import render_template, session, redirect, url_for
 
 """
+    isLoginned
+    check whether loginned  or not
+    parameter : None
+    return : (True/False)
+"""
+def isLoginned():
+    if 'id' in session:
+        return True
+    else:
+        return False
+
+"""
     logout
     expire the session
     parameter : None
