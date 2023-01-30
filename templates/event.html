@@ -159,7 +159,7 @@
                 {% else %}
                   오전
                 {% endif %}
-                {% if (event.event_time[:2]|int) >= 12 %}
+                {% if (event.event_time[:2]|int) >= 13 %}
                   {{ (event.event_time[:2]|int) - 12 }}시
                 {% else %}
                   {{ event.event_time[:2]|int }}시
