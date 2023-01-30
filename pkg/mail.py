@@ -4,9 +4,6 @@ import smtplib
 import pymysql
 import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
-import time
-from flask import Flask, render_template
-import schedule
 
 conn = pymysql.connect(host = 'localhost',
                         user = 'root',
@@ -15,8 +12,6 @@ conn = pymysql.connect(host = 'localhost',
                         charset = 'utf8')
 cur = conn.cursor()  
                    
-
-
 def send_mail(user_email, user_name, user_events, user_routines):                    # 메일 발송 모듈
     SMTP_SERVER = 'smtp.gmail.com'                                        # 환경 변수
     SMTP_PORT = 465
@@ -533,7 +528,7 @@ def sched_send(app):
     print('sched_send starts')
     sched_01 = BackgroundScheduler(daemon=True)
     # sched.add_job(check_schedule(), 'cron', hour='8', id = 'sched_id_1')
-    sched_01.add_job(check_schedule, 'cron', minute='23', id = 'sched_id_1')
+    sched_01.add_job(check_schedule, 'cron', minute='31', id = 'sched_id_1')
     sched_01.start()
     app.run(use_reloader=False)                                             
     # app.run()
@@ -558,7 +553,7 @@ del_event()
 def sched_del_event(app):
     print('sched_del starts')
     sched_02 = BackgroundScheduler(daemon=True) 
-    sched_02.add_job(del_event, 'cron', minute='23', id = 'sched_id_2')
+    sched_02.add_job(del_event, 'cron', minute='31', id = 'sched_id_2')
     sched_02.start()
     # app.run(use_reloader=False)
     # app.run()
