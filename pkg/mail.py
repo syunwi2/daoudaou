@@ -477,7 +477,13 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_image_3 .v-
                                             
 
  # 발송 여부 체크 및 발송
-def check_schedule():                                                    
+def check_schedule(): 
+    conn = pymysql.connect(host = 'localhost',
+                          user = 'root',
+                          password = 'root1234',
+                          db = 'daoudaou',
+                          charset = 'utf8')
+    cur = conn.cursor()                                                    
     today_date = str(datetime.datetime.now().date())             # 오늘 날짜 for event 체크
     today_day = datetime.datetime.today().weekday()              # 오늘 요일 2진수 변환 for routine 체크
     if today_day == 0:                                           
@@ -518,26 +524,35 @@ def check_schedule():
           if (today_day&routine_day):
                 user_routines.append(routine)
                 # print(routine)
-        # print(user_events, user_routines)            
+        print("check schedule : ", user_events, user_routines)            
         if user_events or user_routines: 
             send_mail(user_email, user_name, user_events, user_routines)                            # 메일 발송
+    conn.close()  
         
 
 # check_schedule()
 
 # 매일 일정시간에 메일 보내기
-def sched_send(app):
+def sched_send():
     print('sched_send starts')
     sched_01 = BackgroundScheduler(daemon=True)
     # sched.add_job(check_schedule, 'cron', hour='8', id = 'sched_id_1')
-    sched_01.add_job(check_schedule, 'cron', minute='31', id = 'sched_id_1')
+    # sched_01.add_job(check_schedule, 'cron', minute='17', id = 'sched_id_1')
+    sched_01.add_job(check_schedule, 'cron', minute='26')
     sched_01.start()
-    app.run(use_reloader=False)                                             
+    # app.run(use_reloader=False)                                             
     # app.run()
     
 
 # 기간 지난 이벤트 삭제하기
 def del_event():
+  conn = pymysql.connect(host = 'localhost',
+                          user = 'root',
+                          password = 'root1234',
+                          db = 'daoudaou',
+                          charset = 'utf8')
+  cur = conn.cursor() 
+  
   cur.execute('select datetime from event')
   print('del_event start')
   for date in list(cur):
@@ -547,14 +562,18 @@ def del_event():
     if event_date < today:
       cur.execute(f'delete from event where datetime = \'{event_date}\'') 
       cur.execute('commit')
+      
+  conn.close()
 
 
 
 # 매일 일정시간에 이벤트 삭제하기
-def sched_del_event(app):
+def sched_del_event():
     print('sched_del starts')
     sched_02 = BackgroundScheduler(daemon=True) 
-    sched_02.add_job(del_event, 'cron', minute='31', id = 'sched_id_2')
+    sched_02.add_job(del_event, 'cron', minute='27')
+    # sched_02.add_job(del_event, 'cron', minute='17', id = 'sched_id_2')
+    # sched_02.add_job(del_event, 'cron', hour ='0', id = 'sched_id_2')
     sched_02.start()
     # app.run(use_reloader=False)
     # app.run()
