@@ -528,7 +528,7 @@ def sched_send(app):
     print('sched_send starts')
     sched_01 = BackgroundScheduler(daemon=True)
     # sched.add_job(check_schedule(), 'cron', hour='8', id = 'sched_id_1')
-    sched_01.add_job(check_schedule, 'cron', minute='45', id = 'sched_id_1')
+    sched_01.add_job(check_schedule, 'cron', minute='40', id = 'sched_id_1')
     sched_01.start()
     app.run(use_reloader=False)                                             
     # app.run()
@@ -557,7 +557,7 @@ def del_event():
 # 매일 일정시간에 이벤트 삭제하기 2    
 def sched_del_event():
     print('sched_del starts')
-    schedule.every().day.at("04:20").do(del_event)
+    schedule.every().day.at("09:40").do(del_event)
     # schedule.every(3).seconds.do(del_event)
     while True:
         schedule.run_pending()
