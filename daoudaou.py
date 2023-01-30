@@ -51,7 +51,7 @@ def join():
 @app.route("/logout")
 def logout():
     if not User.isLoginned():
-        return redirect(url_for('firstpage', isLoginned=None))
+        return redirect(url_for("firstpage", isLoginned=None))
     return User.logout()
 
 
@@ -63,7 +63,7 @@ def logout():
 @app.route("/event")
 def event():
     if not User.isLoginned():
-        return redirect(url_for('firstpage', isLoginned=None))
+        return redirect(url_for("firstpage", isLoginned=None))
     print("Now here")
     user_name = make_irreg.get_name()
     my_list = make_irreg.irreg_view()
@@ -79,7 +79,7 @@ def event():
 @app.route("/routine")
 def routine():
     if not User.isLoginned():
-        return redirect(url_for('firstpage', isLoginned=None))
+        return redirect(url_for("firstpage", isLoginned=None))
     page = True
     user_name = make_irreg.get_name()
     my_list = make_reg.reg_view()
@@ -128,7 +128,6 @@ def erase_routine():
     sort_of = "routine"
     make_reg.erase_routine(key, sort_of)
     return "success"
-
 
 
 sched_send(app)
