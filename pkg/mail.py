@@ -13,7 +13,7 @@ conn = pymysql.connect(host = 'localhost',
 cur = conn.cursor()  
                    
 def send_mail(user_email, user_name, user_events, user_routines):                    # 메일 발송 모듈
-    SMTP_SERVER = 'smtp.gmail.com'                                        # 환경 변수
+    SMTP_SERVER = 'smtp.gmail.com'                                                   # 환경 변수
     SMTP_PORT = 465
     SMTP_USER = 'daoudaouuu@gmail.com'
     SMTP_PASSWORD = 'udgcjxmqtamredsa'
@@ -27,7 +27,9 @@ def send_mail(user_email, user_name, user_events, user_routines):               
     
     msg['Subject'] = f'[다우다우] {today.month}월 {today.day}일 일정입니다우다우 ♡'           # 제목      
     
-    mail_head = '''
+    
+    # 메일 내용
+    mail_head = '''                                          
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -249,7 +251,7 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_image_3 .v-
 </div>'''
 
     mail_event = ''
-    
+     
     for event in user_events:
         
         mail_event += f'''
@@ -474,8 +476,8 @@ table, td { color: #000000; } @media (max-width: 480px) { #u_content_image_3 .v-
 
                                             
 
-
-def check_schedule():                                                     # 발송 여부 체크 및 발송
+ # 발송 여부 체크 및 발송
+def check_schedule():                                                    
     today_date = str(datetime.datetime.now().date())             # 오늘 날짜 for event 체크
     today_day = datetime.datetime.today().weekday()              # 오늘 요일 2진수 변환 for routine 체크
     if today_day == 0:                                           
@@ -527,7 +529,7 @@ def check_schedule():                                                     # 발�
 def sched_send(app):
     print('sched_send starts')
     sched_01 = BackgroundScheduler(daemon=True)
-    # sched.add_job(check_schedule(), 'cron', hour='8', id = 'sched_id_1')
+    # sched.add_job(check_schedule, 'cron', hour='8', id = 'sched_id_1')
     sched_01.add_job(check_schedule, 'cron', minute='31', id = 'sched_id_1')
     sched_01.start()
     app.run(use_reloader=False)                                             
@@ -546,7 +548,6 @@ def del_event():
       cur.execute(f'delete from event where datetime = \'{event_date}\'') 
       cur.execute('commit')
 
-del_event()
 
 
 # 매일 일정시간에 이벤트 삭제하기
